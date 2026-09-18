@@ -1,0 +1,66 @@
+name: Bug 报告
+description: 提交缺陷报告，帮助改进 Relivus
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢花时间提交缺陷报告。提交前请先确认同类问题未被报告。
+  - type: input
+    id: version
+    attributes:
+      label: 版本号
+      description: 出现问题的版本（见 docs/CHANGELOG.md 或 `mvn -v` 输出）
+      placeholder: 如 v2.3.0
+    validations:
+      required: true
+  - type: dropdown
+    id: environment
+    attributes:
+      label: 运行环境
+      options:
+        - 本地开发环境
+        - 生产部署（systemd + Nginx）
+        - 其他
+    validations:
+      required: true
+  - type: dropdown
+    id: database
+    attributes:
+      label: 目标数据库
+      options:
+        - MySQL
+        - PostgreSQL
+        - 两者都存在
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: 问题描述
+      description: 清晰描述发生了什么、期望是什么
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 复现步骤
+      description: 提供最小复现步骤，如「创建连接 → 选择表 → 生成 100 行」
+      placeholder: |
+        1. ...
+        2. ...
+        3. 观察到错误
+    validations:
+      required: true
+  - type: textarea
+    id: error_code
+    attributes:
+      label: 错误码与日志（如有）
+      description: 附上六位错误码（如 150005）、traceId 及相关日志片段，注意脱敏敏感信息
+      render: shell
+  - type: textarea
+    id: context
+    attributes:
+      label: 补充信息
+      description: 截图、表结构片段或其他上下文

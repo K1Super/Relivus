@@ -1,0 +1,18 @@
+# 统一文本文件换行符，避免跨平台 diff 噪音
+* text=auto
+*.sh text eol=lf
+*.java text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+*.js text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# 二进制资源不做换行转换
+*.ico binary
+*.png binary
+*.jpg binary
+*.docx binary

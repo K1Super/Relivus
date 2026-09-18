@@ -1,0 +1,52 @@
+/* 日志面板（UI 规范 10.4 + 无障碍 8.6.2） */
+.panel {
+  font-family: var(--font-mono);
+  font-size: var(--font-xs);
+  line-height: var(--line-xs);
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  padding: var(--space-comp-2) var(--space-comp-3);
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.line {
+  display: flex;
+  gap: var(--space-comp-2);
+  white-space: pre-wrap;
+  word-break: break-all;
+  padding: 1px 0;
+}
+
+.time {
+  color: var(--gray-500);
+  flex-shrink: 0;
+}
+
+.level {
+  flex-shrink: 0;
+  font-weight: var(--font-semibold);
+  width: 48px;
+}
+
+.levelInfo {
+  color: var(--color-primary);
+}
+
+.levelWarn {
+  color: var(--color-warning);
+}
+
+.levelError {
+  color: var(--color-error);
+}
+
+.msg {
+  color: var(--gray-700);
+}
+
+.empty {
+  padding: var(--space-comp-2) 0;
+  color: var(--gray-400);
+}

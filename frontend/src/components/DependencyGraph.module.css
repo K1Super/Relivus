@@ -1,0 +1,47 @@
+/* 依赖图（React Flow） */
+.wrapper {
+  position: relative;
+  height: 480px;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.cycleAlert {
+  position: absolute;
+  left: var(--space-layout-2);
+  right: var(--space-layout-2);
+  bottom: var(--space-layout-2);
+  z-index: var(--z-sticky);
+  background: var(--gray-100);
+}
+
+.node {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-comp-1);
+  min-width: 180px;
+  padding: var(--space-comp-2) var(--space-comp-3);
+  background: var(--gray-100);
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  text-align: left;
+}
+
+.node[data-cyclic='true'] {
+  border-color: var(--color-error);
+}
+
+.nodeName {
+  font-size: var(--font-sm);
+  font-weight: var(--font-semibold);
+  color: var(--gray-900);
+  font-family: var(--font-mono);
+}
+
+.nodeMeta {
+  font-size: var(--font-xs);
+  color: var(--gray-500);
+}

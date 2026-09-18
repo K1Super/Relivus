@@ -1,0 +1,36 @@
+/* 空 / 错误状态（UI 规范 5.2 / 5.3） */
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-layout-1);
+  padding: var(--space-layout-6) var(--space-layout-3);
+  text-align: center;
+  color: var(--gray-500);
+}
+
+.icon {
+  color: var(--gray-400);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+}
+
+.title {
+  font-size: var(--font-md);
+  font-weight: var(--font-medium);
+  color: var(--gray-700);
+}
+
+.desc {
+  font-size: var(--font-sm);
+  color: var(--gray-500);
+  max-width: 480px;
+}
+
+.action {
+  margin-top: var(--space-layout-1);
+}

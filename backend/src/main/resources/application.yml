@@ -1,0 +1,62 @@
+server:
+  port: 8080
+  shutdown: graceful
+
+spring:
+  application:
+    name: relivus
+  # Flyway 由 FlywayConfig 接管（按元库方言选迁移目录），关闭 Boot 自动迁移
+  flyway:
+    enabled: false
+  jackson:
+    time-zone: GMT+8
+
+# 全部密钥与连接串经环境变量注入；此处仅提供占位默认值与绑定结构（RelivusProperties）
+relivus:
+  meta:
+    url: ${RELIVUS_META_URL:jdbc:mysql://127.0.0.1:3306/relivus_meta}
+    username: ${RELIVUS_META_USER:relivus}
+    password: ${RELIVUS_META_PASSWORD:}
+  security:
+    token: ${RELIVUS_TOKEN:}
+  crypto:
+    aes-key: ${RELIVUS_AES_KEY:}
+  masking:
+    hmac-key: ${RELIVUS_HMAC_KEY:}
+    key-version: 1
+  task:
+    core-pool-size: 4
+    max-pool-size: 8
+    queue-capacity: 100
+  sse:
+    max-connections: 20
+    heartbeat-seconds: 15
+    timeout: 30m
+  datasource:
+    max-pool-size: 20
+    idle-timeout-minutes: 10
+  ai:
+    connect-timeout-ms: 5000
+    read-timeout-ms: 60000
+    batch-size: 64
+    max-retries: 3
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+logging:
+  config: classpath:logback-spring.xml

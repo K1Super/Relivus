@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 文档目录
+    url: https://github.com/relivus/relivus/tree/main/docs
+    about: 使用问题请先查阅 docs/ 下的文档（含 troubleshooting.md）
+  - name: 讨论区
+    url: https://github.com/relivus/relivus/discussions
+    about: 一般性问题与使用交流请前往 Discussions

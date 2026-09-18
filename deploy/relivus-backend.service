@@ -1,0 +1,13 @@
+[Unit]
+Description=Relivus Backend
+After=network.target mysql.service postgresql.service
+
+[Service]
+User=relivus
+EnvironmentFile=/etc/relivus/relivus.env
+ExecStart=/usr/bin/java -jar /opt/relivus/relivus.jar --spring.profiles.active=prod
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,59 @@
+# 生产环境（systemd + Nginx 部署，见 deploy/README-RUN.md）
+server:
+  port: 8080
+  shutdown: graceful
+
+spring:
+  application:
+    name: relivus
+  flyway:
+    enabled: false
+  jackson:
+    time-zone: GMT+8
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+
+relivus:
+  # 生产环境全部密钥必须来自环境变量，禁止落下明文默认值
+  meta:
+    url: ${RELIVUS_META_URL}
+    username: ${RELIVUS_META_USER}
+    password: ${RELIVUS_META_PASSWORD}
+  security:
+    token: ${RELIVUS_TOKEN}
+  crypto:
+    aes-key: ${RELIVUS_AES_KEY}
+  masking:
+    hmac-key: ${RELIVUS_HMAC_KEY}
+    key-version: ${RELIVUS_KEY_VERSION:1}
+  task:
+    core-pool-size: ${RELIVUS_TASK_CORE:4}
+    max-pool-size: ${RELIVUS_TASK_MAX:8}
+    queue-capacity: ${RELIVUS_TASK_QUEUE:100}
+  sse:
+    max-connections: ${RELIVUS_SSE_MAX:20}
+    heartbeat-seconds: 15
+    timeout: 30m
+  datasource:
+    max-pool-size: ${RELIVUS_TARGET_POOLS:20}
+    idle-timeout-minutes: 10
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: ${RELIVUS_SWAGGER_ENABLED:false}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+logging:
+  config: classpath:logback-spring.xml

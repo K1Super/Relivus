@@ -1,0 +1,43 @@
+# ---- 操作系统 ----
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ---- IDE / 编辑器 ----
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+
+# ---- TraeCode 本地工作区 ----
+.trae/
+
+# ---- 构建产物 ----
+backend/target/
+frontend/dist/
+frontend/node_modules/
+frontend/coverage/
+*.class
+
+# ---- 日志 ----
+*.log
+logs/
+
+# ---- 环境变量与密钥（仅允许提交 .example 模板） ----
+.env
+.env.*
+!.env.example
+*.local
+deploy/relivus.env
+!deploy/relivus.env.example
+
+# ---- 本地运行时数据 ----
+*.sqlite
+*.sqlite3
+*.db
+*.mv.db
+*.h2.db
+
+# ---- 个人资料（不纳入公开仓库） ----
+Relivus项目面试问答手册.docx

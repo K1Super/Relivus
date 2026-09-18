@@ -1,0 +1,32 @@
+/* 进度条（UI 规范 4.7：transform: scaleX，禁止动画 width） */
+.bar {
+  position: relative;
+  height: 4px;
+  background: var(--gray-200);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.fill {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-comp-2);
+}
+
+.percent {
+  font-size: var(--font-xs);
+  font-family: var(--font-mono);
+  color: var(--gray-600);
+  min-width: 40px;
+  text-align: right;
+}
