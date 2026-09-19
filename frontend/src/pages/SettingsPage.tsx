@@ -213,9 +213,11 @@ function AiConfigPanel() {
         <div className="section-title" style={{ margin: 0 }}>
           模型配置
         </div>
-        <Button type="primary" icon={<Plus size={16} />} onClick={openCreate}>
-          新建配置
-        </Button>
+        {(configs.data?.length ?? 0) > 0 && (
+          <Button type="primary" icon={<Plus size={16} />} onClick={openCreate}>
+            新建配置
+          </Button>
+        )}
       </div>
 
       {configs.isLoading ? (
@@ -229,7 +231,7 @@ function AiConfigPanel() {
       ) : (configs.data?.length ?? 0) === 0 ? (
         <EmptyState
           title="还没有 AI 模型配置"
-          description="点击右上角按钮添加第一个模型配置"
+          description="点击下方按钮创建第一个模型配置"
           action={
             <Button type="primary" icon={<Plus size={16} />} onClick={openCreate}>
               新建配置

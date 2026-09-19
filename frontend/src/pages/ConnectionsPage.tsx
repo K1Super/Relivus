@@ -187,9 +187,11 @@ export default function ConnectionsPage() {
           <h1 className="page-title">连接管理</h1>
           <p className="page-subtitle">管理目标库连接，供 Schema 浏览、数据生成与脱敏使用。密码加密存储，不回传前端。</p>
         </div>
-        <Button type="primary" icon={<Plus size={16} />} onClick={openCreate}>
-          新建连接
-        </Button>
+        {(connections.data?.length ?? 0) > 0 && (
+          <Button type="primary" icon={<Plus size={16} />} onClick={openCreate}>
+            新建连接
+          </Button>
+        )}
       </div>
 
       <div className="section-card">
@@ -244,6 +246,7 @@ export default function ConnectionsPage() {
                   { value: 'mysql', label: 'MySQL' },
                   { value: 'postgresql', label: 'PostgreSQL' },
                 ]}
+                onChange={(type: DbType) => form.setFieldValue('port', type === 'mysql' ? 3306 : 5432)}
               />
             </Form.Item>
             <Form.Item name="port" label="端口" rules={[{ required: true, message: '请输入端口' }]} style={{ width: '20%', flexGrow: 1 }}>
