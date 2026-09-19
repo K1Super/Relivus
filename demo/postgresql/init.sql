@@ -49,7 +49,7 @@ CREATE TABLE public.users (
 
 CREATE INDEX idx_users_name ON public.users (name);
 
-COMMENT ON COLUMN public.users.email IS '登录邮箱，唯一，RFC 合规 ASCII 地址';
+COMMENT ON COLUMN public.users.email IS '登录邮箱，唯一，纯 ASCII 码（不含汉字）';
 COMMENT ON COLUMN public.users.name IS '姓名（现代常用中文名，2~4 字）';
 COMMENT ON COLUMN public.users.age IS '年龄，约束 18~70';
 COMMENT ON COLUMN public.users.gender IS '性别：男/女';

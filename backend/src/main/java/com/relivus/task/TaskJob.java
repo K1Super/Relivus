@@ -1,9 +1,9 @@
 package com.relivus.task;
 
 /**
- * 任务执行体（由 Controller 根据任务类型组装，DOC-11.7）。
+ * 任务执行体（由 Controller 根据任务类型组装）。
  *
- * <p>约定：异常（含取消的 RelivusException 5002）不外抛，TaskService 负责捕获并终态化。
+ * <p>约定：异常（含取消的 RelivusException）不外抛，TaskService 负责捕获并终态化。
  */
 @FunctionalInterface
 public interface TaskJob {

@@ -1,5 +1,5 @@
 -- ============================================================
--- Relivus 元库初始化（MySQL 方言）V1
+-- Relivus 元库初始化（MySQL 方言）——初始结构
 -- 说明：目标库绝不执行本脚本；仅 Relivus 自有库（relivus_meta）使用。
 -- ============================================================
 
@@ -19,7 +19,7 @@ CREATE TABLE df_connection (
     UNIQUE KEY uk_connection_name (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='目标库连接';
 
--- 统一任务表（生成/脱敏共用，DOC-05）
+-- 统一任务表（生成/脱敏共用）
 CREATE TABLE df_task (
     id              BIGINT       NOT NULL AUTO_INCREMENT,
     task_type       VARCHAR(32)  NOT NULL COMMENT 'GENERATION / MASKING',
@@ -30,7 +30,7 @@ CREATE TABLE df_task (
     total_rows      BIGINT       NOT NULL DEFAULT 0,
     processed_rows  BIGINT       NOT NULL DEFAULT 0,
     error_message   TEXT         NULL,
-    cancel_requested BOOLEAN     NOT NULL DEFAULT FALSE COMMENT '取消持久化标志（DOC-11.7）',
+    cancel_requested BOOLEAN     NOT NULL DEFAULT FALSE COMMENT '取消持久化标志',
     created_at      TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     started_at      TIMESTAMP    NULL,
     finished_at     TIMESTAMP    NULL,
@@ -39,7 +39,7 @@ CREATE TABLE df_task (
     KEY idx_task_created (created_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='统一任务表';
 
--- 任务日志（DOC-05）
+-- 任务日志
 CREATE TABLE df_task_log (
     id          BIGINT       NOT NULL AUTO_INCREMENT,
     task_id     BIGINT       NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE df_task_log (
     CONSTRAINT fk_task_log_task FOREIGN KEY (task_id) REFERENCES df_task (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='任务日志';
 
--- 脱敏映射表（DOC-04：同组同原始值跨表保持一致，唯一键防并发重复写）
+-- 脱敏映射表（同组同原始值跨表保持一致，唯一键防并发重复写）
 CREATE TABLE df_mask_mapping (
     id             BIGINT       NOT NULL AUTO_INCREMENT,
     column_group   VARCHAR(255) NOT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE df_mask_mapping (
     UNIQUE KEY uk_mask_group_hash (column_group, original_hash)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='脱敏映射表';
 
--- 操作审计（DOC-10）
+-- 操作审计
 CREATE TABLE df_audit_log (
     id          BIGINT       NOT NULL AUTO_INCREMENT,
     action      VARCHAR(64)  NOT NULL COMMENT 'connection_create / generation_execute 等',

@@ -6,7 +6,7 @@ import net.datafaker.Faker;
 import java.util.Locale;
 
 /**
- * DataFaker 假值替换（DOC-04）：生成同类型假数据。
+ * DataFaker 假值替换：生成同类型假数据。
  * 参数：provider（email / phone / name / address / company / city / uuid / text，默认 name）。
  * Faker 实例为线程安全单例。
  */

@@ -7,9 +7,9 @@ import java.sql.Connection;
 import java.util.List;
 
 /**
- * Schema 内省接口（DOC-02）。
+ * Schema 内省接口。
  *
- * <p>封装对目标数据库全部业务表的元数据读取，具体读取 SQL 由方言实现（DOC-01），
+ * <p>封装对目标数据库全部业务表的元数据读取，具体读取 SQL 由方言实现，
  * 本接口作为内省入口，便于缓存与测试 Mock。
  */
 public interface SchemaIntrospector {

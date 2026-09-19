@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 脱敏执行/预览配置（DOC-06 / POST /api/masking/*）。
+ * 脱敏执行/预览配置（POST /api/masking/*）。
  *
  * @param connectionId 目标库连接 ID
  * @param tables       各表脱敏规则
  * @param batchSize    批量读取/更新大小，默认 1000
- * @param verifyTables 待验证 JOIN 一致性的表（脱敏前自动建快照，DOC-04 方案 A）
+ * @param verifyTables 待验证 JOIN 一致性的表（脱敏前自动建快照）
  */
 @Schema(description = "脱敏配置")
 public record MaskingTaskRequest(

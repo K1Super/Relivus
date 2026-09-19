@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * 表依赖图（DOC-03，基于 JGraphT）。
+ * 表依赖图（基于 JGraphT）。
  *
  * <p>顶点为表名；外键 parent → child 建边；自引用外键不加入边集。
  * 提供图、拓扑排序结果与强连通循环检测。

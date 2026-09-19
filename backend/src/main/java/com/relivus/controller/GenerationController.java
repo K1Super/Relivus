@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 数据生成接口（DOC-06）。
+ * 数据生成接口。
  *
  * <pre>
  * POST /api/generation/preview  同步小批量试生成（每表 ≤ 5 行，真实插入）
@@ -111,7 +111,7 @@ public class GenerationController {
         taskService.executeAsync(taskId, ctx -> {
             DataSource dataSource = connectionService.resolveDataSource(request.connectionId());
             DatabaseDialect dialect = connectionService.dialect(request.connectionId());
-            // 数据回看基线：必须在引擎插入前采集（DOC-06），失败则任务整体失败，保证回看准确性
+            // 数据回看基线：必须在引擎插入前采集，失败则任务整体失败，保证回看准确性
             Map<String, Long> baselines = taskDataService.captureBaselines(dataSource, dialect, request);
             try {
                 taskService.updateDataBaseline(taskId, objectMapper.writeValueAsString(baselines));

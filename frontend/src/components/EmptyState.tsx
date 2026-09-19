@@ -8,7 +8,7 @@ interface EmptyStateProps {
   action?: ReactNode;
 }
 
-/** 空状态：图标 + 文案 + 操作（UI 规范 5.2）。 */
+/** 空状态：图标 + 文案 + 操作。 */
 export function EmptyState({
   title = '暂无数据',
   description,

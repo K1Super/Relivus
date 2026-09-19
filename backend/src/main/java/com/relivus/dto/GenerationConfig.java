@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 生成执行/预览配置（DOC-03 / DOC-06）。
+ * 生成执行/预览配置。
  *
  * @param connectionId     目标库连接 ID
  * @param tables           各表配置

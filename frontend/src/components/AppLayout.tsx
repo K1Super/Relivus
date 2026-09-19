@@ -34,7 +34,7 @@ interface AppLayoutProps {
   connectionLabel?: string;
 }
 
-/** 应用外壳：56px 顶栏 + 240px 侧栏 + 32px 底栏（UI 规范 3.1）。 */
+/** 应用外壳：56px 顶栏 + 240px 侧栏 + 32px 底栏。 */
 export function AppLayout({ children }: AppLayoutProps) {
   return (
     <div className={styles.layout}>

@@ -14,9 +14,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
- * SSE 连接上限集成测试（DOC-08 / 5003）。
+ * SSE 连接上限集成测试。
  *
- * <p>超过 20 个并发 SSE 连接时第 21 个被拒绝并抛 5003；心跳对存活连接发送 heartbeat
+ * <p>超过 20 个并发 SSE 连接时第 21 个被拒绝；心跳对存活连接发送 heartbeat
  * 事件不抛异常。纯内存验证，无需数据库。
  */
 class SseLimitIT {

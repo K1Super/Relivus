@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * 时间生成器：过去时间段内、随行号单调递增的时间（DOC-03 列名启发式：created_at/updated_at 等）。
+ * 时间生成器：过去时间段内、随行号单调递增的时间（列名启发式：created_at/updated_at 等）。
  * 参数：secondsAgo 最大回看秒数（默认 5 年）。
  *
  * <p>数据质量整改：按行号在回看窗口内线性推进并叠加小幅抖动，保证表内时间随行号近似单调、

@@ -17,7 +17,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * 集成测试基类（DOC-08）。
+ * 集成测试基类。
  *
  * <p>共享 MySQL 8.0 与 PostgreSQL 16 容器；Docker 不可用时整个测试类自动跳过
  * （{@code disabledWithoutDocker}，assumption 失败按 skipped 处理，不阻塞构建）。

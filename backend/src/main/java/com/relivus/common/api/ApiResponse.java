@@ -7,7 +7,7 @@ import org.slf4j.MDC;
 import java.util.List;
 
 /**
- * 统一接口响应结构（DOC-06 契约 v2）。
+ * 统一接口响应结构。
  *
  * <p>错误响应保证携带 {@code traceId}（源自 MDC，由 {@code TraceIdFilter} 写入），
  * 校验类错误附带 {@code fieldErrors} 明细，前端可精确提示到字段。

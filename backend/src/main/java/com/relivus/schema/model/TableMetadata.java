@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * 表元数据（DOC-02 领域模型）。
+ * 表元数据（领域模型）。
  *
  * @param tableName       表名
  * @param columns         列

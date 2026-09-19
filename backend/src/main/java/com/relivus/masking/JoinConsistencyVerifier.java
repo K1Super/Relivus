@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * JOIN 一致性验证（DOC-04 方案 A：临时快照表）。
+ * JOIN 一致性验证（临时快照表）。
  *
  * <p>流程：脱敏前将目标行（主键 + JOIN 键）采样到目标库临时快照表；脱敏后逐条重跑
  * JOIN SQL（按主键绑定），对比返回行数与 JOIN 键值。不采用长事务（大表回滚代价高），

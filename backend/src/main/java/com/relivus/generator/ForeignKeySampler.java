@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * 外键采样器（DOC-03 / P0 补丁）。
+ * 外键采样器。
  *
  * <p>禁止全量加载父表主键：先 COUNT，再按随机偏移取单行；ZIPF 策略把偏移向小序号倾斜。
  * 支持在已有数据中采样（父表有存量数据时保证外键有效）。

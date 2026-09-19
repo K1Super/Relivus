@@ -18,7 +18,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import java.util.List;
 
 /**
- * 全局异常处理器（DOC-06 契约 v2 / 企业规范 §2.6）。
+ * 全局异常处理器。
  *
  * <p>职责：
  * <ul>

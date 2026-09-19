@@ -4,7 +4,7 @@ import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 
 /**
- * 本地唯一值检测（DOC-11.2：唯一检测内存控制）。
+ * 本地唯一值检测（唯一检测内存控制）。
  *
  * <p>第一层为数据库唯一约束兜底，本类为第二层：本地仅缓存最近 N 个值（LRU，默认 10000），
  * 避免百万行场景 {@code Map<列组, Set<值>>} 导致 OOM。

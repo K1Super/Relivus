@@ -10,7 +10,7 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * 关联列识别（DOC-04 关联列识别）。
+ * 关联列识别。
  *
  * <p>分组规则：
  * <ul>

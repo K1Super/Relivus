@@ -3,7 +3,7 @@ package com.relivus.generator;
 import com.relivus.schema.model.ColumnMetadata;
 
 /**
- * 值生成器 SPI（DOC-03）。
+ * 值生成器 SPI。
  *
  * <p>按列类型 / 列名启发式 / 用户显式配置选择实现。实现必须线程安全或无共享可变状态。
  */

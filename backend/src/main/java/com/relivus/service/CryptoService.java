@@ -13,7 +13,7 @@ import java.security.SecureRandom;
 import java.util.Base64;
 
 /**
- * 连接密码加解密（DOC-10）。
+ * 连接密码加解密。
  *
  * <p>AES-GCM 256，密钥来自环境变量 {@code RELIVUS_AES_KEY}（Base64 32 字节）。
  * 密文格式：{@code Base64(IV(12B) || cipherText || tag)}。

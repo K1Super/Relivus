@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 /**
- * Schema 缓存（DOC-02）。
+ * Schema 缓存。
  *
  * <p>Caffeine 最大 100 项，写入后 10 分钟过期。key 为连接 ID，value 为该连接全量表元数据。
  */

@@ -3,7 +3,7 @@ package com.relivus.masking;
 import com.relivus.dto.MaskingConfig;
 
 /**
- * 身份证号脱敏（DOC-04）：保留前 6 后 4，中间 8 个 {@code *}，如 {@code 110101********1234}。
+ * 身份证号脱敏：保留前 6 后 4，中间 8 个 {@code *}，如 {@code 110101********1234}。
  * 长度不足 10 时原样返回。
  */
 public class IdCardMask implements MaskingAlgorithm {

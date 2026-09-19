@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Schema 缓存测试（DOC-02）。
+ * Schema 缓存测试。
  *
  * <p>验证缓存命中只加载一次、手动失效后重新加载、清空全失效。
  */

@@ -1,7 +1,7 @@
 package com.relivus.generator;
 
 /**
- * 父表主键采样策略（DOC-03）。
+ * 父表主键采样策略。
  */
 public enum SamplingStrategy {
     /** 均匀采样：随机偏移取行。 */

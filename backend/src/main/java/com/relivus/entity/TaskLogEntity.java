@@ -3,7 +3,7 @@ package com.relivus.entity;
 import java.time.LocalDateTime;
 
 /**
- * 任务日志实体（DOC-05 对应元数据库表 df_task_log）。
+ * 任务日志实体（对应元数据库表 df_task_log）。
  *
  * <p>task_id 直接引用 {@code df_task.id}。日志用于任务审计与失败排查。
  */

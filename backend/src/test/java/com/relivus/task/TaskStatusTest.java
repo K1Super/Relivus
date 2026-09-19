@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * 任务状态机测试（DOC-05：终态判定）。
+ * 任务状态机测试（终态判定）。
  */
 class TaskStatusTest {
 

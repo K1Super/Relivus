@@ -1,6 +1,6 @@
 /* global.css — 全局布局与共享工具类（组件级样式统一走 CSS Modules） */
 
-/* ===== 应用布局（UI 规范 3.1：56px 顶栏 / 240px 侧栏 / 32px 底栏） ===== */
+/* ===== 应用布局（56px 顶栏 / 240px 侧栏 / 32px 底栏） ===== */
 .app-layout {
   display: flex;
   flex-direction: column;

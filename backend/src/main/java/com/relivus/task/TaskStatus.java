@@ -1,7 +1,7 @@
 package com.relivus.task;
 
 /**
- * 任务状态机（DOC-05）。
+ * 任务状态机。
  *
  * <pre>
  * PENDING → RUNNING → SUCCESS
@@ -10,7 +10,7 @@ package com.relivus.task;
  * </pre>
  *
  * <p>PENDING：已入队；RUNNING：线程池执行中；终态：SUCCESS / FAILED / CANCELLED。
- * 取消仅对 PENDING 与 RUNNING 有效（DOC-11.7）。
+ * 取消仅对 PENDING 与 RUNNING 有效。
  */
 public enum TaskStatus {
     PENDING,

@@ -6,7 +6,7 @@ import com.relivus.schema.model.ColumnMetadata;
 import java.util.Map;
 
 /**
- * 生成上下文（DOC-03）。
+ * 生成上下文。
  *
  * @param table    当前表名
  * @param column   当前列

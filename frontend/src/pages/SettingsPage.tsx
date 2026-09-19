@@ -283,7 +283,7 @@ function AiConfigPanel() {
   );
 }
 
-/** 设置页：Bearer Token 管理 + AI 模型配置（统一 localStorage key relivusToken，DOC-07）。 */
+/** 设置页：Bearer Token 管理 + AI 模型配置（统一 localStorage key relivusToken）。 */
 export default function SettingsPage() {
   const { message } = App.useApp();
   const { token, setToken, clearToken } = useAuthStore();

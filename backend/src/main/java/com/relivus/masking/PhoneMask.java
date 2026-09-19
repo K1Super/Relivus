@@ -3,7 +3,7 @@ package com.relivus.masking;
 import com.relivus.dto.MaskingConfig;
 
 /**
- * 手机号脱敏（DOC-04）：保留前 3 后 4，中间 {@code ****}，如 {@code 138****1234}。
+ * 手机号脱敏：保留前 3 后 4，中间 {@code ****}，如 {@code 138****1234}。
  * 长度不足 7 时原样返回，不破坏短字段。
  */
 public class PhoneMask implements MaskingAlgorithm {

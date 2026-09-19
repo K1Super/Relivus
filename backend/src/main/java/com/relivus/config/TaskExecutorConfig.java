@@ -16,14 +16,14 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
  * （任务队列已满），不静默丢弃、不使用 CallerRunsPolicy。
  *
  * <p>{@link TaskDecorator} 将主线程的 MDC（traceId 等）传递到任务线程，并在任务结束时清理，
- * 保证异步链路的日志可追溯且不残留线程上下文（见日志治理规范 §9）。
+ * 保证异步链路的日志可追溯且不残留线程上下文。
  */
 @Configuration
 public class TaskExecutorConfig {
 
     private static final Logger log = LoggerFactory.getLogger(TaskExecutorConfig.class);
 
-    /** 任务执行器 Bean 名称，与 DOC-05 定义一致。 */
+    /** 任务执行器 Bean 名称。 */
     public static final String TASK_EXECUTOR = "taskExecutor";
 
     @Bean(TASK_EXECUTOR)

@@ -8,7 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * <p>解决演示数据两大脏数据问题：
  * <ol>
  *   <li>姓名：仅使用常见现代单姓与常用名（剔除生僻字、古风复姓），贴合真实业务用户特征；</li>
- *   <li>邮箱：由姓名拼音构成本地部分，保证全 ASCII、RFC 合规（支持中文系统真实收发）。</li>
+ *   <li>邮箱：由姓名拼音构成本地部分，保证全 ASCII（支持中文系统真实收发）。</li>
  * </ol>
  */
 final class ChinesePersonData {
@@ -112,7 +112,7 @@ final class ChinesePersonData {
         return null;
     }
 
-    /** 随机 RFC 合规 ASCII 邮箱：拼音姓+名（约 4 成追加 2~4 位数字），全 ASCII、与姓名语义关联。 */
+    /** 随机全 ASCII 邮箱：拼音姓+名（约 4 成追加 2~4 位数字），全 ASCII、与姓名语义关联。 */
     static String randomEmail() {
         ThreadLocalRandom r = ThreadLocalRandom.current();
         int genderIdx = r.nextInt(GIVEN_NAMES_BY_GENDER.length);

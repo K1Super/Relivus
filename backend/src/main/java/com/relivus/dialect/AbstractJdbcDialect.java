@@ -27,11 +27,11 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * 基于 {@link DatabaseMetaData} 的通用内省骨架（DOC-01 / DOC-02）。
+ * 基于 {@link DatabaseMetaData} 的通用内省骨架。
  *
  * <p>表、列、主键、外键、唯一索引的读取逻辑双库一致，由本类实现；CHECK 与 ENUM 的
  * 查询 SQL 因库而异，由子类提供 {@link #findCheckConstraints} 与 {@link #findEnumValues}。
- * 内省失败统一包装为错误码 2001。
+ * 内省失败统一包装为内省异常。
  */
 public abstract class AbstractJdbcDialect implements DatabaseDialect {
 

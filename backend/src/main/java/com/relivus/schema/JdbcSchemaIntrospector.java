@@ -10,9 +10,9 @@ import java.sql.Connection;
 import java.util.List;
 
 /**
- * JDBC 内省实现（DOC-02）。
+ * JDBC 内省实现。
  *
- * <p>委托方言完成 JDBC 元数据读取，异常统一包装为错误码 2001。
+ * <p>委托方言完成 JDBC 元数据读取，异常统一包装为内省失败。
  */
 @Component
 public class JdbcSchemaIntrospector implements SchemaIntrospector {

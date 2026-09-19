@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * 脱敏映射表并发写集成测试（DOC-08 / DOC-11.6）。
+ * 脱敏映射表并发写集成测试。
  *
  * <p>100 线程对同一分组 + 同一原始值并发脱敏：唯一索引 + INSERT IGNORE / ON CONFLICT
  * 兜底，最终映射表只落一条记录。

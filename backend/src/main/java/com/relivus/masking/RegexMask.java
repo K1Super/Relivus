@@ -7,7 +7,7 @@ import com.relivus.dto.MaskingConfig;
 import java.util.regex.Pattern;
 
 /**
- * 正则替换（DOC-04）：按 pattern 匹配，replacement 替换，支持 $1 分组引用保留。
+ * 正则替换：按 pattern 匹配，replacement 替换，支持 $1 分组引用保留。
  * 参数：pattern（必填，最长 200）、replacement（必填）。
  * 参数缺失/超长/非法时抛 {@link ErrorCode#VALIDATION_FAILED}，避免落入服务端兜底错误码。
  */

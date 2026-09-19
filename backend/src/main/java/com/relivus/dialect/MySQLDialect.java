@@ -18,7 +18,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * MySQL 8.0 方言（DOC-01）。
+ * MySQL 8.0 方言。
  *
  * <ul>
  *   <li>标识符反引号引用</li>

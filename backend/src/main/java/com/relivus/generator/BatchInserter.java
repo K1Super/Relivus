@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 批量插入器（DOC-11.1 主键回填）。
+ * 批量插入器（主键回填）。
  *
  * <p>父表插入使用 {@link GeneratedKeyHolder} 分批回填自增主键，子表外键引用回填 ID。
  * SQL 由方言构建，批大小可配（默认 1000）。
@@ -51,7 +51,7 @@ public class BatchInserter {
                 .map(c -> new String[]{c.columnName()})
                 .orElse(null);
         // PostgreSQL 批量 INSERT ... RETURNING 的 keys 返回顺序不保证与 VALUES 顺序一致，
-        // 会导致主键回填错位（如 created_at 与 id 非单调）。PG 下逐行插入取 key 保证与 rows 顺序一致（DOC-11.1）。
+        // 会导致主键回填错位（如 created_at 与 id 非单调）。PG 下逐行插入取 key 保证与 rows 顺序一致。
         if ("postgresql".equals(dialect.name())) {
             for (Object[] row : rows) {
                 KeyHolder keyHolder = new GeneratedKeyHolder();

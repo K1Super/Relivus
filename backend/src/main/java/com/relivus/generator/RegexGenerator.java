@@ -8,7 +8,7 @@ import net.datafaker.Faker;
 import java.util.Locale;
 
 /**
- * 正则生成器：按正则表达式生成随机匹配串（DOC-03，手机号等）。
+ * 正则生成器：按正则表达式生成随机匹配串（手机号等）。
  * 参数：pattern（必填，最长 200，如 {@code 1[3-9]\\d{9}}）。
  * 基于 DataFaker regexify 实现；pattern 非法时回退为「int 转串」避免整表失败。
  */

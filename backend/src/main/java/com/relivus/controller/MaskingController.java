@@ -35,7 +35,7 @@ import javax.sql.DataSource;
 import java.util.Locale;
 
 /**
- * 数据脱敏接口（DOC-06）。
+ * 数据脱敏接口。
  *
  * <pre>
  * POST /api/masking/preview  同步预览（不落库不写映射）
@@ -130,7 +130,7 @@ public class MaskingController {
             DataSource dataSource = connectionService.resolveDataSource(request.connectionId());
             DatabaseDialect dialect = connectionService.dialect(request.connectionId());
             JdbcTemplate jt = new JdbcTemplate(dataSource);
-            // 脱敏前采样快照（DOC-04 方案 A）
+            // 脱敏前采样快照
             if (request.verifyTables() != null) {
                 JoinConsistencyVerifier verifier = new JoinConsistencyVerifier();
                 for (VerifyTableSpec spec : request.verifyTables()) {

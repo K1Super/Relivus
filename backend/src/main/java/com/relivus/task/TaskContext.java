@@ -18,7 +18,7 @@ public interface TaskContext {
     /** 写入任务日志（INFO/WARN/ERROR），落库并推送。 */
     void log(String level, String message);
 
-    /** 取消令牌：引擎每批处理校验，返回 true 时引擎中止并抛 5002。 */
+    /** 取消令牌：引擎每批处理校验，返回 true 时引擎中止并抛取消失败异常。 */
     boolean isCancelled();
 
     /** 生成引擎监听器（桥接 {@link #progress} / {@link #log} / {@link #isCancelled}）。 */

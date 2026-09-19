@@ -31,7 +31,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * 任务服务测试（DOC-08：创建/状态流转/取消）。线程池 submit 同步执行以验证状态机。
+ * 任务服务测试（创建/状态流转/取消）。线程池 submit 同步执行以验证状态机。
  */
 class TaskServiceTest {
 

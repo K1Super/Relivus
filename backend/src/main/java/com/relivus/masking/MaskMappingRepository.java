@@ -8,7 +8,7 @@ import javax.sql.DataSource;
 import java.util.List;
 
 /**
- * 脱敏映射表数据访问（DOC-11.6 并发写）。
+ * 脱敏映射表数据访问（并发写）。
  *
  * <p>元数据库表 {@code df_mask_mapping}，唯一键 {@code (column_group, original_hash)}。
  * 并发写统一采用「INSERT 忽略冲突 + 回读」：MySQL 用 {@code INSERT IGNORE}，

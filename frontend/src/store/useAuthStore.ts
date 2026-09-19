@@ -8,7 +8,7 @@ interface AuthState {
   clearToken: () => void;
 }
 
-/** Token 状态（DOC-07：生产由设置页输入存 localStorage；dev 回退 VITE_RELIVUS_TOKEN）。 */
+/** Token 状态（生产由设置页输入存 localStorage；dev 回退 VITE_RELIVUS_TOKEN）。 */
 export const useAuthStore = create<AuthState>(set => ({
   token: resolveToken(),
   setToken: token => {

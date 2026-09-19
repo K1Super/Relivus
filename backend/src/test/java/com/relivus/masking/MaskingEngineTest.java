@@ -29,7 +29,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * 脱敏引擎测试（DOC-04 / DOC-08）。
+ * 脱敏引擎测试。
  *
  * <p>启发式算法选择 + H2（MODE=MySQL）端到端执行：keyset 分页、批量回写、
  * 同组幂等映射、预览不落库、WHERE 过滤、非字符串列跳过、校验与取消分支。

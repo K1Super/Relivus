@@ -36,7 +36,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * 生成数据回看服务测试（DOC-06）。
+ * 生成数据回看服务测试。
  *
  * <p>基线采集与分页查数使用 H2（MODE=MySQL）走真实 SQL 路径；表元数据经
  * {@link SchemaIntrospector} mock 注入，隔离目标库内省差异。

@@ -34,7 +34,7 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * 生成数据回看服务（DOC-06 / GET /api/tasks/{id}/tables、/data）。
+ * 生成数据回看服务（GET /api/tasks/{id}/tables、/data）。
  *
  * <p>原理：生成任务执行前采集各表基线 {@code MAX(主键)}（truncate 模式基线为 0，
  * 无数值主键的表基线为 null），随任务持久化至 {@code df_task.data_baseline_json}；

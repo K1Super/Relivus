@@ -5,10 +5,10 @@ import com.relivus.task.TaskStatus;
 import java.time.LocalDateTime;
 
 /**
- * 统一任务实体（DOC-05 对应元数据库表 df_task）。
+ * 统一任务实体（对应元数据库表 df_task）。
  *
  * <p>生成与脱敏任务共用一张表；{@code configJson} 保存任务配置（GenerationConfig / MaskingTaskRequest
- * 的 JSON），由执行层反序列化。{@code cancelRequested} 为取消持久化标志（DOC-11.7 P0 补丁），
+ * 的 JSON），由执行层反序列化。{@code cancelRequested} 为取消持久化标志，
  * 引擎每批处理同时检查内存标志与该列。
  */
 public class TaskEntity {
@@ -24,7 +24,7 @@ public class TaskEntity {
     private long processedRows;
     private String errorMessage;
     private boolean cancelRequested;
-    /** 生成任务各表基线 MAX(主键) JSON（DOC-06 数据回看；null 表示无数值主键，回看全表）。 */
+    /** 生成任务各表基线 MAX(主键) JSON（数据回看；null 表示无数值主键，回看全表）。 */
     private String dataBaselineJson;
     private LocalDateTime createdAt;
     private LocalDateTime startedAt;

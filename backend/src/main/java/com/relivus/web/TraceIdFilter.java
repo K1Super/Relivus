@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 /**
- * 全链路 TraceId 过滤器（日志治理规范 §12）。
+ * 全链路 TraceId 过滤器。
  *
  * <p>优先沿用请求头 {@code X-Trace-Id}（前端会话级全局 TraceId），缺失时后端生成并回写响应头，
  * 保证端到端链路贯通。TraceId 写入 MDC，异步链路经 {@code TaskDecorator} 透传；请求结束清理 MDC，

@@ -14,7 +14,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * 批量插入器测试（DOC-08 补充：行覆盖）。
+ * 批量插入器测试（行覆盖）。
  *
  * <p>H2 真实 SQL：批量插入生效、自增主键逐批回填。
  */

@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * CHECK 约束元数据（DOC-02 / DOC-11.4）。
+ * CHECK 约束元数据。
  *
  * @param constraintName 约束名
  * @param columns        涉及列（多列表达式标记 UNKNOWN）

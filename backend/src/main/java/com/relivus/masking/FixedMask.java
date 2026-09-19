@@ -3,7 +3,7 @@ package com.relivus.masking;
 import com.relivus.dto.MaskingConfig;
 
 /**
- * 固定值替换（DOC-04）。
+ * 固定值替换。
  * 参数：value（必填）。
  */
 public class FixedMask implements MaskingAlgorithm {

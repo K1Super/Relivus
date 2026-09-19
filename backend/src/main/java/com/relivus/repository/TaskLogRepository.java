@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 /**
- * 任务日志数据访问（df_task_log，DOC-05）。
+ * 任务日志数据访问（df_task_log）。
  */
 @Repository
 public class TaskLogRepository {

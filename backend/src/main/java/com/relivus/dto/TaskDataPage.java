@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 
 /**
- * 生成任务数据回看：分页数据页（DOC-06 / GET /api/tasks/{id}/data）。
+ * 生成任务数据回看：分页数据页（GET /api/tasks/{id}/data）。
  *
  * @param table            表名
  * @param columns          列（顺序与 rows 内层数组一致）

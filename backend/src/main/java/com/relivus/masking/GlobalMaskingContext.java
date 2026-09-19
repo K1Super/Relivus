@@ -19,7 +19,7 @@ import java.util.HexFormat;
 import java.util.Map;
 
 /**
- * 全局脱敏上下文（DOC-04 / DOC-11.3）。
+ * 全局脱敏上下文。
  *
  * <p>同一原始值在同 {@link MaskingConfig#columnGroup()} 内跨表、跨任务保持一致：
  * 读取顺序 = 内存缓存（Caffeine，1 万条 LRU）→ 元库映射表 → 实时计算并持久化。

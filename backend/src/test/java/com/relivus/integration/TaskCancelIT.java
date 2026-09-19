@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * 任务运行中取消集成测试（DOC-08 / DOC-11.7）。
+ * 任务运行中取消集成测试。
  *
  * <p>元库用 H2 内存库（df_task/df_task_log），目标库用真实 MySQL 容器；
  * 生成大表使任务运行足够久，中途 cancel 后轮询断言状态变为 CANCELLED。

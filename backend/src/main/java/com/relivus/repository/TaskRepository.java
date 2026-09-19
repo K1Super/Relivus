@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * 统一任务表数据访问（df_task，DOC-05）。
+ * 统一任务表数据访问（df_task）。
  */
 @Repository
 public class TaskRepository {
@@ -120,7 +120,7 @@ public class TaskRepository {
                 toTimestamp(startedAt), id);
     }
 
-    /** 取消持久化标志（DOC-11.7：cancel 时同步落库）。 */
+    /** 取消持久化标志（cancel 时同步落库）。 */
     public int markCancelRequested(Long id) {
         return jdbcTemplate.update("UPDATE df_task SET cancel_requested = TRUE WHERE id = ?", id);
     }
@@ -132,7 +132,7 @@ public class TaskRepository {
         return Boolean.TRUE.equals(flag);
     }
 
-    /** 写入生成数据回看基线 JSON（DOC-06：任务开始执行前由生成流程写入）。 */
+    /** 写入生成数据回看基线 JSON（任务开始执行前由生成流程写入）。 */
     public int updateDataBaseline(Long id, String dataBaselineJson) {
         return jdbcTemplate.update("UPDATE df_task SET data_baseline_json = ? WHERE id = ?",
                 dataBaselineJson, id);

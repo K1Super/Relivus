@@ -1,7 +1,7 @@
 package com.relivus.dialect;
 
 /**
- * 分页语法（DOC-01 差异表）。
+ * 分页语法。
  *
  * <ul>
  *   <li>MySQL：{@code LIMIT offset, size}</li>

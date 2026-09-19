@@ -17,9 +17,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * SSE 进度推送器（DOC-11.8 按任务分组）。
+ * SSE 进度推送器（按任务分组）。
  *
- * <p>连接管理：{@code Map<Long, Set<SseEmitter>>} 按 taskId 分组；全局连接数上限 20（超限抛 5003）；
+ * <p>连接管理：{@code Map<Long, Set<SseEmitter>>} 按 taskId 分组；全局连接数上限 20（超限抛异常）；
  * 超时 30 分钟（SseEmitter 构造参数）；心跳每 15 秒一次（{@code heartbeat} 事件，负载 "{}"）。
  * 断线自动清理：onCompletion / onTimeout / onError 移除对应连接。
  */
@@ -28,7 +28,7 @@ public class SseTaskProgressNotifier implements TaskProgressNotifier {
 
     private static final Logger LOG = LoggerFactory.getLogger(SseTaskProgressNotifier.class);
 
-    /** 全局最大 SSE 连接数（DOC-05 / DOC-11.8）。 */
+    /** 全局最大 SSE 连接数。 */
     private static final int MAX_CONNECTIONS = 20;
 
     private final Map<Long, Set<SseEmitter>> emittersByTask = new ConcurrentHashMap<>();
@@ -40,7 +40,7 @@ public class SseTaskProgressNotifier implements TaskProgressNotifier {
     }
 
     /**
-     * 注册任务连接。全局并发连接达到 20 时拒绝并抛 5003。
+     * 注册任务连接。全局并发连接达到 20 时拒绝并抛异常。
      */
     public void register(Long taskId, SseEmitter emitter) {
         synchronized (emittersByTask) {
@@ -94,7 +94,7 @@ public class SseTaskProgressNotifier implements TaskProgressNotifier {
         removeTask(taskId);
     }
 
-    /** 心跳：每 15 秒对所有存活连接发送 heartbeat 事件（DOC-05）。 */
+    /** 心跳：每 15 秒对所有存活连接发送 heartbeat 事件。 */
     @Scheduled(fixedRate = 15_000)
     public void heartbeat() {
         if (emittersByTask.isEmpty()) {

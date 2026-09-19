@@ -28,7 +28,7 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * 脱敏引擎（DOC-04 / DOC-11）。
+ * 脱敏引擎。
  *
  * <p>流程：内省目标表 → 解析列算法（用户配置 > 列名启发式 > 固定掩码）→ 关联列分组
  * → keyset/OFFSET 分页读取 → {@link GlobalMaskingContext} 逐值脱敏（保证跨表同值一致）

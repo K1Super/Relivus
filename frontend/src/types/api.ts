@@ -1,5 +1,5 @@
 /**
- * 领域类型 — 与后端 DTO 一一对应（DOC-06）。
+ * 领域类型 — 与后端 DTO 一一对应。
  */
 
 /** 统一响应包裹（code=0 成功）。 */
@@ -226,7 +226,7 @@ export interface TaskResponse {
   finishedAt: string | null;
 }
 
-/* ===== 生成数据回看（DOC-06：任务成功后可视化本次生成的行） ===== */
+/* ===== 生成数据回看（任务成功后可视化本次生成的行） ===== */
 export interface TaskGeneratedTable {
   table: string;
   rowCount: number;
@@ -250,7 +250,7 @@ export interface TaskDataPage {
   watermarkApplied: boolean;
 }
 
-/* ===== SSE 事件（DOC-05） ===== */
+/* ===== SSE 事件 ===== */
 export interface SseProgressEvent {
   taskId: number;
   progress: number;
@@ -273,7 +273,7 @@ export interface SseErrorEvent {
   message: string;
 }
 
-/* ===== 错误码 → 用户提示（DOC-06 统一表） ===== */
+/* ===== 错误码 → 用户提示 ===== */
 export const ERROR_CODE_TEXT: Record<number, string> = {
   100002: '参数校验失败，请检查填写内容',
   100003: '鉴权失败，请到设置页填写 Token',
@@ -305,7 +305,7 @@ export interface ApiFault {
   message: string;
 }
 
-/** 从任一错误形态提取用户可读提示（含错误码，符合 UI 规范 5.3）。 */
+/** 从任一错误形态提取用户可读提示（含错误码）。 */
 export function describeError(err: unknown): string {
   if (err instanceof ApiError) {
     const hint = ERROR_CODE_TEXT[err.code];

@@ -14,10 +14,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
- * 线程池拒绝策略集成测试（DOC-08 / 5004）。
+ * 线程池拒绝策略集成测试。
  *
  * <p>核心 1 / 最大 1 / 队列 0：首个任务占满唯一工作线程后，新任务无法入队且无空闲
- * 线程，触发自定义拒绝处理器抛 {@code RELIVUS_TASK_QUEUE_FULL}（5004）。
+ * 线程，触发自定义拒绝处理器抛 {@code RELIVUS_TASK_QUEUE_FULL}。
  */
 class ThreadPoolRejectIT {
 

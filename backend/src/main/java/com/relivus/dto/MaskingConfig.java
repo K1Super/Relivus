@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Map;
 
 /**
- * 脱敏算法配置（DOC-11.5）。
+ * 脱敏算法配置。
  *
  * @param algorithm   算法名：fixed / regex / hmac / phone / id_card / bank_card / faker
  * @param params      算法参数（字符串键值，如 fixed 的 value、regex 的 pattern/replacement、faker 的 provider）
@@ -25,7 +25,7 @@ public record MaskingConfig(
         }
     }
 
-    /** 便捷构造：仅算法与分组，版本 1。 */
+    /** 便捷构造：仅算法与分组，密钥版本取默认值。 */
     public static MaskingConfig of(String algorithm, String columnGroup) {
         return new MaskingConfig(algorithm, Map.of(), columnGroup, 1);
     }

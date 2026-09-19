@@ -9,7 +9,7 @@ const STATUS_META: Record<TaskStatus, { color: string; label: string }> = {
   CANCELLED: { color: 'warning', label: '已取消' },
 };
 
-/** 任务状态标签（UI 规范 10.2 状态色映射）。 */
+/** 任务状态标签（状态色映射）。 */
 export function TaskStatusTag({ status }: { status: TaskStatus }) {
   const meta = STATUS_META[status] ?? { color: 'default', label: status };
   return <Tag color={meta.color}>{meta.label}</Tag>;

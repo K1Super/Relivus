@@ -12,7 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * CHECK 约束解析器（DOC-02 / DOC-11.4）。
+ * CHECK 约束解析器。
  *
  * <p>仅解析两种语义：{@code col IN ('A','B')} 与 {@code col >= x AND col <= y}；
  * 同时兼容 PostgreSQL 将 {@code IN} 改写为 {@code col = ANY (ARRAY[...])} 的表示。

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * 分页语法差异测试（DOC-01 差异表）。
+ * 分页语法差异测试（差异表）。
  */
 class PaginationSyntaxTest {
 

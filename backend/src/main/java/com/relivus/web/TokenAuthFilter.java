@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 /**
- * 统一 Bearer Token 鉴权过滤器（DOC-06 / 00-standards P0 契约）。
+ * 统一 Bearer Token 鉴权过滤器。
  *
  * <p>所有 {@code /api/**} 请求必须携带 {@code Authorization: Bearer ${RELIVUS_TOKEN}}，Token
  * 来自环境变量 {@code RELIVUS_TOKEN}。校验失败返回 HTTP 401 + 错误码 100003。

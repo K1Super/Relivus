@@ -8,7 +8,7 @@ package com.relivus.ai;
  * 日志中只允许出现 {@code name}/{@code model}。
  *
  * @param name    配置名称（日志用）
- * @param baseUrl OpenAI 兼容接口基址，如 {@code https://api.deepseek.com/v1}
+ * @param baseUrl OpenAI 兼容接口基址
  * @param apiKey  解密后的明文密钥（敏感，勿外泄）
  * @param model   模型名
  */

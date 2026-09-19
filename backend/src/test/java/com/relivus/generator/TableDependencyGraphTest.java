@@ -12,7 +12,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * 表依赖图测试（DOC-03：顶点/边、自引用排除、邻接表）。
+ * 表依赖图测试（顶点/边、自引用排除、邻接表）。
  */
 class TableDependencyGraphTest {
 

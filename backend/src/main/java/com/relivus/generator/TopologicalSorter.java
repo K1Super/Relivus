@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Kahn 拓扑排序（DOC-03）。
+ * Kahn 拓扑排序。
  *
  * <p>返回排序结果；存在环时返回环内顶点集合（按强连通分量分解成多个环），供引擎做
  * 「循环依赖 FK 可空校验」与两阶段插入。

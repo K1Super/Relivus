@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * 目标库动态数据源注册表（00-standards P0 契约 / DOC-09）。
+ * 目标库动态数据源注册表。
  *
  * <p>按 {@code connectionId} 动态创建并缓存目标库 HikariDataSource，连接池最大 20 个，
  * 空闲超过 10 分钟自动关闭。目标库绝不执行 Flyway。
@@ -33,7 +33,7 @@ public class TargetDataSourceRegistry {
         this.props = props;
     }
 
-    /** 按连接 ID 获取数据源；不存在则创建。创建失败抛 {@code RelivusException(1001)}。 */
+    /** 按连接 ID 获取数据源；不存在则创建，创建失败抛异常。 */
     public DataSource get(Long connectionId, ConnectionParams params) {
         Entry existing = pools.get(connectionId);
         if (existing != null) {

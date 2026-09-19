@@ -26,7 +26,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Schema 内省接口（DOC-06）。元数据经 {@link SchemaCache} 缓存（10 分钟）。
+ * Schema 内省接口。元数据经 {@link SchemaCache} 缓存（10 分钟）。
  */
 @Tag(name = "Schema 内省")
 @RestController

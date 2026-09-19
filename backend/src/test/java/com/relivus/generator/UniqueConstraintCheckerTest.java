@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * 唯一约束检测器测试（DOC-11.2：冲突、LRU 淘汰、重置）。
+ * 唯一约束检测器测试（冲突、LRU 淘汰、重置）。
  */
 class UniqueConstraintCheckerTest {
 

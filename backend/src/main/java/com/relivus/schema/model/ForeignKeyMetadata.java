@@ -1,7 +1,7 @@
 package com.relivus.schema.model;
 
 /**
- * 外键元数据（DOC-02 领域模型）。
+ * 外键元数据（领域模型）。
  *
  * @param fkName    外键约束名
  * @param columnName 本表外键列

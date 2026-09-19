@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.Timestamp;
 
 /**
- * 本地操作审计日志（df_audit_log，DOC-10）。
+ * 本地操作审计日志（df_audit_log）。
  *
  * <p>记录关键操作（创建/删除连接、任务创建/取消等），单用户工具亦保留，便于追溯与备份。
  */

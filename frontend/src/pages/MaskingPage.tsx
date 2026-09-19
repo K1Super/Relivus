@@ -33,7 +33,7 @@ import {
 
 type RuleState = Record<string, MaskingTableRule>;
 
-/** 数据脱敏页：敏感列规则、映射分组、JOIN 一致性验证（DOC-07 / DOC-04）。 */
+/** 数据脱敏页：敏感列规则、映射分组、JOIN 一致性验证。 */
 export default function MaskingPage() {
   const { message } = App.useApp();
   const navigate = useNavigate();

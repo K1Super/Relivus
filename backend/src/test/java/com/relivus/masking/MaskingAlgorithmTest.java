@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
- * 脱敏算法单元测试（DOC-08：确定性、格式保留）。
+ * 脱敏算法单元测试（确定性、格式保留）。
  */
 class MaskingAlgorithmTest {
 

@@ -27,7 +27,7 @@ type SelectedState = Record<string, boolean>;
 type RowCountState = Record<string, number>;
 type ColumnConfigState = Record<string, Record<string, GenerationColumnConfig>>;
 
-/** 数据生成页：表选择、行数、列生成器、采样策略、预览与执行（DOC-07）。 */
+/** 数据生成页：表选择、行数、列生成器、采样策略、预览与执行。 */
 export default function GenerationPage() {
   const { message } = App.useApp();
   const navigate = useNavigate();

@@ -4,7 +4,7 @@ import com.relivus.common.exception.ErrorCode;
 import com.relivus.common.exception.RelivusException;
 
 /**
- * 不支持的数据库类型（错误码 1002，DOC-01）。
+ * 不支持的数据库类型。
  */
 public class UnsupportedDatabaseException extends RelivusException {
 

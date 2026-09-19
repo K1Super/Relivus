@@ -3,7 +3,7 @@ package com.relivus.schema.model;
 import java.util.List;
 
 /**
- * 列元数据（DOC-02 领域模型）。
+ * 列元数据（领域模型）。
  *
  * @param columnName    列名
  * @param dataType      JDBC 数据类型名（大写）

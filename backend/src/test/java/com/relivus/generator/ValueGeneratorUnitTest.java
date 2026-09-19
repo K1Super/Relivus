@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
- * 各值生成器单元测试（DOC-03）。
+ * 各值生成器单元测试。
  */
 class ValueGeneratorUnitTest {
 
@@ -88,7 +88,7 @@ class ValueGeneratorUnitTest {
     void regexGeneratorFallsBackOnInvalidPattern() {
         RegexGenerator generator = new RegexGenerator();
         ColumnMetadata column = col("phone", "VARCHAR", true, List.of());
-        // 参数缺失改走带错误码的校验异常（v2：不再抛裸 IllegalArgumentException）
+        // 参数缺失改走带错误码的校验异常（不再抛裸 IllegalArgumentException）
         assertThatThrownBy(() -> generator.generate(ctx(column, Map.of(), 0)))
                 .isInstanceOf(RelivusException.class)
                 .extracting(e -> ((RelivusException) e).getErrorCode())

@@ -1,4 +1,4 @@
-/* 进度条（UI 规范 4.7：transform: scaleX，禁止动画 width） */
+/* 进度条（transform: scaleX，禁止动画 width） */
 .bar {
   position: relative;
   height: 4px;

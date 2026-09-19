@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 日志脱敏工具（日志治理规范 §7 安全红线）。
+ * 日志脱敏工具（安全红线）。
  *
  * <p>任何日志输出前必须经本工具处理：密码/Token/密钥完全掩码；手机号、身份证、银行卡、
  * 邮箱等个人隐私按"部分保留"策略脱敏。业务代码不得绕过。

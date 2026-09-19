@@ -15,7 +15,7 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * 数据生成引擎集成测试（DOC-08 / DOC-03）。
+ * 数据生成引擎集成测试。
  *
  * <p>双数据库真实执行：外键完整性、唯一无冲突、循环依赖可空成功。
  */

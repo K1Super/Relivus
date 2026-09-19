@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
- * 外键采样器测试（DOC-08 补充：行覆盖）。
+ * 外键采样器测试（行覆盖）。
  *
  * <p>H2 真实 SQL 驱动：统一/倾斜采样、空父表拒绝、分页取数。
  */

@@ -9,7 +9,7 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * CHECK 约束解析器测试（DOC-08：IN、范围、UNKNOWN）。
+ * CHECK 约束解析器测试（IN、范围、UNKNOWN）。
  */
 class CheckConstraintParserTest {
 

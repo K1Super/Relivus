@@ -10,7 +10,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Flyway 迁移集成测试（DOC-08 / DOC-05 统一任务表）。
+ * Flyway 迁移集成测试（统一任务表）。
  *
  * <p>双数据库空库执行迁移脚本（{@code db/migration/{mysql,postgresql}}），
  * 验证 df_connection / df_task / df_task_log / df_mask_mapping / df_audit_log 全部就位。

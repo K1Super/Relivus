@@ -6,11 +6,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 
 /**
- * 幂等键守卫（DOC-06：POST /execute 支持 Idempotency-Key）。
+ * 幂等键守卫（POST /execute 支持 Idempotency-Key）。
  *
  * <p>同一 Idempotency-Key 在 TTL（24 小时）内返回首次创建的任务 ID，防止客户端重复提交
  * 生成/脱敏任务。实现为进程内存储（单实例部署语义），多实例横向扩展时需改由元数据库承载，
- * 限制在实现注释与部署文档中说明。
+ * 限制在实现注释中说明。
  */
 @Component
 public class IdempotencyGuard {

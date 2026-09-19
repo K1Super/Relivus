@@ -15,10 +15,10 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
- * 循环依赖 FK 为 NOT NULL 的集成测试（DOC-08 / 3003）。
+ * 循环依赖 FK 为 NOT NULL 的集成测试。
  *
  * <p>team_a ↔ team_b 互相引用且外键列 NOT NULL：两阶段插入无法先置 NULL，
- * 引擎必须校验并抛出 {@code RELIVUS_CIRCULAR_FK_NOT_NULL}（3003）。
+ * 引擎必须校验并抛出 {@code RELIVUS_CIRCULAR_FK_NOT_NULL}。
  */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class CircularFkNotNullIT extends AbstractDatabaseIT {

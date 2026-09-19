@@ -15,7 +15,7 @@ function fmtTime(iso?: string | null): string {
   return iso ? dayjs(iso).format('MM-DD HH:mm:ss') : '—';
 }
 
-/** 任务监控页：统一任务列表 + SSE 进度/日志 + 取消（DOC-07）。 */
+/** 任务监控页：统一任务列表 + SSE 进度/日志 + 取消。 */
 export default function TasksPage() {
   const { message } = App.useApp();
   const [searchParams, setSearchParams] = useSearchParams();

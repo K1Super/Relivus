@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * 统一任务接口（DOC-06：任务 API 统一为 /api/tasks/**）。
+ * 统一任务接口（任务 API 统一为 /api/tasks/**）。
  *
  * <p>除任务生命周期外，还承载生成数据回看：{@code /{id}/tables}（表清单）与
  * {@code /{id}/data}（分页数据），供任务成功后前端直接可视化本次生成的行。

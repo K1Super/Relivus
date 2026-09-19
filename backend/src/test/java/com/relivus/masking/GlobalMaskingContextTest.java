@@ -23,7 +23,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * 全局脱敏上下文测试（DOC-08：缓存一致性、持久化回退）。
+ * 全局脱敏上下文测试（缓存一致性、持久化回退）。
  *
  * <p>通过反射注入 mock 映射仓库，验证三级读取与写入回退逻辑。
  */

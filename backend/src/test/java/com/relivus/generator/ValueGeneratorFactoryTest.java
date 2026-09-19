@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
 
 /**
- * 值生成器解析工厂测试（DOC-03 解析顺序：用户配置 > 自增 > 外键 > ENUM > CHECK > 主键 > 列名 > 类型）。
+ * 值生成器解析工厂测试（解析顺序：用户配置 > 自增 > 外键 > ENUM > CHECK > 主键 > 列名 > 类型）。
  */
 class ValueGeneratorFactoryTest {
 

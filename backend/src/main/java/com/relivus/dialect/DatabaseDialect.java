@@ -8,7 +8,7 @@ import java.sql.DatabaseMetaData;
 import java.util.List;
 
 /**
- * 数据库方言抽象（DOC-01）。
+ * 数据库方言抽象。
  *
  * <p>封装 MySQL/PostgreSQL 在 URL、标识符引用、分页、自增、类型映射、内省 SQL 上的差异。
  */

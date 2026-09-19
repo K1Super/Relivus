@@ -39,7 +39,7 @@ interface FormValues {
 
 const DB_LABEL: Record<string, string> = { mysql: 'MySQL', postgresql: 'PostgreSQL' };
 
-/** 连接管理页：列表、新建/编辑、测试、删除（DOC-07）。 */
+/** 连接管理页：列表、新建/编辑、测试、删除。 */
 export default function ConnectionsPage() {
   const { message } = App.useApp();
   const [form] = Form.useForm<FormValues>();

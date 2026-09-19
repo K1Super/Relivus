@@ -3,7 +3,7 @@ package com.relivus.common.exception;
 import org.springframework.http.HttpStatus;
 
 /**
- * 全局错误码表 v2（DOC-06 / 00-standards P0 契约升级版）。
+ * 全局错误码表。
  *
  * <p><b>编码结构（六位三段式 {@code A-BB-CCC}）</b>：
  * <pre>

@@ -1,4 +1,4 @@
-/* 空 / 错误状态（UI 规范 5.2 / 5.3） */
+/* 空 / 错误状态 */
 .box {
   display: flex;
   flex-direction: column;

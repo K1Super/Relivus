@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import { ApiError, type ApiResponse } from '@/types/api';
 
-/** Token 存 localStorage 的统一 key（DOC-07：Axios 与 SSE 共用）。 */
+/** Token 存 localStorage 的统一 key（Axios 与 SSE 共用）。 */
 export const API_TOKEN_KEY = 'relivusToken';
 
 /** 成功码（后端 ApiResponse.code=0 表示成功）。 */
@@ -14,7 +14,7 @@ export const AUTH_ERROR_CODE = 100003;
 const HTTP_ERROR_CODE = 999000;
 
 /**
- * Axios 实例（DOC-07）：
+ * Axios 实例：
  * - 请求拦截器注入 `Authorization: Bearer ${token}`。
  * - 响应拦截器解包 ApiResponse<T>：code=0 返回 data；code!=0 抛 ApiError。
  * - 鉴权失败（HTTP 401 或码 100003）通知订阅方跳转设置页。
@@ -85,7 +85,7 @@ api.interceptors.response.use(
   },
 );
 
-/** 生成幂等键（execute/preview/verify 请求头 Idempotency-Key，DOC-06）。 */
+/** 生成幂等键（execute/preview/verify 请求头 Idempotency-Key）。 */
 export function newIdempotencyKey(): string {
   if (typeof crypto !== 'undefined' && 'randomUUID' in crypto) {
     return crypto.randomUUID();

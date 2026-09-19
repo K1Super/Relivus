@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * Bearer Token 鉴权过滤器测试（DOC-08：无 Token / 错 Token 抛 9001）。
+ * Bearer Token 鉴权过滤器测试（无 Token / 错 Token 抛鉴权失败）。
  */
 class TokenAuthFilterTest {
 

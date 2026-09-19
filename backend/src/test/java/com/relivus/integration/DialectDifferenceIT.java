@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * 双数据库方言差异集成测试（DOC-08 / DOC-01）。
+ * 双数据库方言差异集成测试。
  *
  * <p>同一份查询在 MySQL 与 PostgreSQL 上验证：分页语法（LIMIT ?,? vs LIMIT ? OFFSET ?）、
  * 标识符引用、类型映射（布尔类型、分页结果一致）。

@@ -7,10 +7,10 @@ import java.sql.DatabaseMetaData;
 import java.util.List;
 
 /**
- * 方言注册表（DOC-01）。
+ * 方言注册表。
  *
  * <p>通过 {@code DatabaseMetaData.getDatabaseProductName()} 匹配方言；匹配失败抛
- * {@link UnsupportedDatabaseException}（错误码 1002）。
+ * {@link UnsupportedDatabaseException}。
  */
 @Component
 public class DialectRegistry {

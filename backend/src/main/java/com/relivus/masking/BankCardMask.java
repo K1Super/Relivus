@@ -3,7 +3,7 @@ package com.relivus.masking;
 import com.relivus.dto.MaskingConfig;
 
 /**
- * 银行卡号脱敏（DOC-04）：保留前 4 后 4，中间 8 个 {@code *}，如 {@code 6222********1234}。
+ * 银行卡号脱敏：保留前 4 后 4，中间 8 个 {@code *}，如 {@code 6222********1234}。
  * 长度不足 8 时原样返回。
  */
 public class BankCardMask implements MaskingAlgorithm {

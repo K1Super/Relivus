@@ -161,7 +161,7 @@ function toRuleFrom(rule: MaskingColumnRule | undefined): MaskingColumnRule {
 }
 
 /**
- * 脱敏规则配置（DOC-07 MaskingRuleForm）。
+ * 脱敏规则配置（MaskingRuleForm）。
  * 默认（不勾选）不脱敏；勾选后选择算法、参数与映射分组；表级 where 可选。
  */
 export function MaskingRuleForm({ detail, value, onChange }: MaskingRuleFormProps) {

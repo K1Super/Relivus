@@ -3,7 +3,7 @@ package com.relivus.masking;
 import com.relivus.dto.MaskingConfig;
 
 /**
- * 脱敏算法 SPI（DOC-04）。
+ * 脱敏算法 SPI。
  *
  * <p>实现必须线程安全且无状态（密钥由 {@link HmacHash} 构造注入，参数一律走 {@link MaskingConfig#params()}）。
  */

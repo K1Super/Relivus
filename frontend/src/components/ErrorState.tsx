@@ -8,7 +8,7 @@ interface ErrorStateProps {
   action?: ReactNode;
 }
 
-/** 错误状态：原因 + 解决路径 + 可操作按钮（UI 规范 5.3）。 */
+/** 错误状态：原因 + 解决路径 + 可操作按钮。 */
 export function ErrorState({
   title = '操作失败',
   description,

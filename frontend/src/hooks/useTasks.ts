@@ -7,7 +7,7 @@ export function useTasks(limit = 20, offset = 0) {
   return useQuery({
     queryKey: [...TASKS_KEY, limit, offset],
     queryFn: () => taskApi.list(limit, offset),
-    // 存在运行中任务时轮询刷新（数据加载目标 ≤3s，UI 规范 6.1）
+    // 存在运行中任务时轮询刷新（数据加载目标 ≤3s）
     refetchInterval: query => {
       const tasks = query.state.data;
       return tasks?.some(t => t.status === 'RUNNING' || t.status === 'PENDING') ? 3000 : false;

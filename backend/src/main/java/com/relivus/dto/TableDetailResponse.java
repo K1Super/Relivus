@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * 表详情（DOC-06 / GET /api/schema/{connId}/tables/{table}）。
+ * 表详情（GET /api/schema/{connId}/tables/{table}）。
  */
 @Schema(description = "表详情")
 public record TableDetailResponse(

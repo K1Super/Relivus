@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * 目标库连接管理接口（DOC-06）。
+ * 目标库连接管理接口。
  */
 @Tag(name = "连接管理")
 @RestController

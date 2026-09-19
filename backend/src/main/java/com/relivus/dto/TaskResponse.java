@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDateTime;
 
 /**
- * 任务响应（DOC-06 / GET /api/tasks）。
+ * 任务响应（GET /api/tasks）。
  *
  * <p>不返回 configJson（含连接级配置的序列化，前端无需回显），其余字段与 df_task 对齐。
  */

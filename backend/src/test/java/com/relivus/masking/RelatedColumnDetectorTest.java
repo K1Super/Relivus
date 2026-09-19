@@ -11,7 +11,7 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * 关联列识别测试（DOC-04：外键分组、同名列分组、复合键）。
+ * 关联列识别测试（外键分组、同名列分组、复合键）。
  */
 class RelatedColumnDetectorTest {
 

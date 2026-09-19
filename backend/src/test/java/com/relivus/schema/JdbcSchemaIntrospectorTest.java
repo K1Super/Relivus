@@ -23,10 +23,10 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * 内省器测试（DOC-02 / DOC-08 补充）。
+ * 内省器测试。
  *
  * <p>Mock DatabaseMetaData 驱动方言通用内省骨架全链路：表/列/主键/唯一索引读取、
- * 系统表过滤、复合主键回退、异常包装 2001，以及方言 SQL 构建与 MySQL 细节。
+ * 系统表过滤、复合主键回退、异常包装，以及方言 SQL 构建与 MySQL 细节。
  */
 class JdbcSchemaIntrospectorTest {
 

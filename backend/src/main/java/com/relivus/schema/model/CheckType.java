@@ -1,7 +1,7 @@
 package com.relivus.schema.model;
 
 /**
- * CHECK 约束解析类型（DOC-02）。
+ * CHECK 约束解析类型。
  *
  * <p>仅解析 {@code IN (...)} 与 {@code col >= x AND col <= y} 两种形式；
  * 多列或复杂表达式一律标记 {@link #UNKNOWN}，不猜测语义。

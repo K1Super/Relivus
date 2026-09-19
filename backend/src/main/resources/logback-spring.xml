@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Relivus 日志配置（日志治理规范）：
+  Relivus 日志配置：
   - 禁止 System.out / printStackTrace 直出；
   - 关键节点与异常场景输出结构化内容，TraceId 经 MDC 透传（%X{traceId}）；
   - prod profile 输出单行 | 分隔字段（ts|level|traceId|logger|msg），便于采集与解析；

@@ -20,6 +20,6 @@ ALTER TABLE users
 -- 3. 非空补齐 + 列注释（与 init.sql 对齐）
 ALTER TABLE users
     MODIFY age INT NOT NULL COMMENT '年龄，约束 18~70',
-    MODIFY email VARCHAR(255) NOT NULL COMMENT '登录邮箱，唯一，RFC 合规 ASCII 地址',
+    MODIFY email VARCHAR(255) NOT NULL COMMENT '登录邮箱，唯一，纯 ASCII 码（不含汉字）',
     MODIFY name VARCHAR(64) NOT NULL COMMENT '姓名（现代常用中文名，2~4 字）',
     MODIFY created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间（不超过当前时间）';

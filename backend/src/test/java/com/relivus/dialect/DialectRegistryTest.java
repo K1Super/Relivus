@@ -13,7 +13,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * 方言注册表测试（DOC-08 / DOC-01）。
+ * 方言注册表测试。
  */
 class DialectRegistryTest {
 

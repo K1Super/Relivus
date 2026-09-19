@@ -15,7 +15,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Supplier;
 
 /**
- * AI 列级值生成器（DOC-03 / DOC-11：列级 AI 生成 + 失败降级）。
+ * AI 列级值生成器（列级 AI 生成 + 失败降级）。
  *
  * <p>生命周期：每个「表 × 列 × 任务」由 {@link ValueGeneratorFactory} 新建一个实例，实例不共享，
  * 故 {@code cache}/{@code degraded} 等可变状态天然线程安全、无需加锁。首次 {@code generate}

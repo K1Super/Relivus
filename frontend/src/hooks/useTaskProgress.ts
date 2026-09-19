@@ -32,7 +32,7 @@ const initialState: TaskProgressState = {
 };
 
 /**
- * 订阅任务进度 SSE（DOC-07 / DOC-05）。
+ * 订阅任务进度 SSE。
  * - 使用 @microsoft/fetch-event-source（原生 EventSource 无法携带 Authorization）。
  * - progress / log / done / error 事件解析；done/error 后主动断开。
  * - onerror 默认行为即断线自动重连。
@@ -110,7 +110,7 @@ export function useTaskProgress(taskId: number | undefined) {
         }
       },
       onerror(err) {
-        // 不抛错 → fetch-event-source 按默认策略断线重连（DOC-05）。
+        // 不抛错 → fetch-event-source 按默认策略断线重连。
         if (!disposed) {
           pushLog('ERROR', `SSE 连接中断，自动重连中：${String(err)}`);
         }

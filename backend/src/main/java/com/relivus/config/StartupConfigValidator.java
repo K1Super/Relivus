@@ -77,7 +77,7 @@ public class StartupConfigValidator implements ApplicationRunner {
         }
     }
 
-    /** 日志脱敏：遮蔽内嵌凭据与 query 中的 password 参数（企业规范 §4.3，禁止日志打印凭据）。 */
+    /** 日志脱敏：遮蔽内嵌凭据与 query 中的 password 参数（禁止日志打印凭据）。 */
     static String maskUrl(String url) {
         String masked = url.replaceAll("(?i)(password=)[^&]*", "$1***");
         int at = masked.indexOf('@');

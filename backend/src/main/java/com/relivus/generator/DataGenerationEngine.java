@@ -31,9 +31,9 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * 数据生成引擎（DOC-03 / DOC-11）。
+ * 数据生成引擎。
  *
- * <p>执行流程：内省 → 按配置过滤并校验 → 依赖图 → Kahn 拓扑排序 → 循环依赖 FK 可空校验（3003）
+ * <p>执行流程：内省 → 按配置过滤并校验 → 依赖图 → Kahn 拓扑排序 → 循环依赖 FK 可空校验
  * → 可选清空 → 非循环表按拓扑序生成（本地唯一检测 + 数据库唯一索引兜底）→ 循环表两阶段插入
  * （阶段一 FK 置 NULL，阶段二按主键回填）。逐批回调进度与取消令牌。
  */
@@ -44,7 +44,7 @@ public class DataGenerationEngine {
 
     /** 单行唯一冲突最大重试次数。 */
     public static final int MAX_ROW_RETRY = 100;
-    /** 连续冲突达到该阈值判定为低基数无法收敛（错误码 3002）。 */
+    /** 连续冲突达到该阈值判定为低基数无法收敛。 */
     public static final int LOW_CARDINALITY_FAIL_THRESHOLD = 10;
 
     private final ValueGeneratorFactory factory;
@@ -169,7 +169,7 @@ public class DataGenerationEngine {
         }
     }
 
-    /** 循环依赖中加入环的 FK 列不可空时拒绝执行（错误码 3003）。 */
+    /** 循环依赖中加入环的 FK 列不可空时拒绝执行。 */
     private void validateCircularFkNullable(Map<String, TableMetadata> selected, List<List<String>> cycles) {
         for (List<String> cycle : cycles) {
             Set<String> cycleSet = new LinkedHashSet<>(cycle);
@@ -266,7 +266,7 @@ public class DataGenerationEngine {
         }
     }
 
-    /** 批量插入 + 数据库唯一索引兜底（本地 LRU 淘汰后的真实冲突逐行重插重生成，DOC-11.2）。 */
+    /** 批量插入 + 数据库唯一索引兜底（本地 LRU 淘汰后的真实冲突逐行重插重生成）。 */
     private void flushInsert(JdbcTemplate jt, DatabaseDialect dialect, TableMetadata meta,
                              ColumnPlan plan, List<Object[]> batch, RowRegenerator regenerator) {
         BatchInserter inserter = new BatchInserter(jt, dialect);
@@ -378,7 +378,7 @@ public class DataGenerationEngine {
                 Map.copyOf(indexByColumn));
     }
 
-    /** 生成单行并做唯一检测，冲突重试；连续冲突达阈值抛唯一冲突异常（3002）。 */
+    /** 生成单行并做唯一检测，冲突重试；连续冲突达阈值抛唯一冲突异常。 */
     private Object[] generateRow(TableMetadata meta, ColumnPlan plan, TableConfig cfg,
                                  long rowIndex, long totalRows, UniqueConstraintChecker checker,
                                  FkMode fkMode, DatabaseDialect dialect, ForeignKeySampler fkSampler,

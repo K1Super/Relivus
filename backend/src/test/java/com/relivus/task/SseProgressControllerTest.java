@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * SSE 进度端点测试（DOC-05 / DOC-11.8）。
+ * SSE 进度端点测试。
  *
  * <p>验证前置任务校验、返回 text/event-stream 与订阅注册。
  */

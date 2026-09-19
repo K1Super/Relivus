@@ -5,7 +5,7 @@ interface ProgressBarProps {
   ariaLabel?: string;
 }
 
-/** 进度条：只通过 transform: scaleX 驱动（UI 规范 4.7）。 */
+/** 进度条：只通过 transform: scaleX 驱动。 */
 export function ProgressBar({ percent, ariaLabel = '任务进度' }: ProgressBarProps) {
   const clamped = Math.max(0, Math.min(100, Math.round(percent)));
   return (

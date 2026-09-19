@@ -27,7 +27,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * 数据生成引擎测试（DOC-08 补充：行覆盖）。
+ * 数据生成引擎测试（行覆盖）。
  *
  * <p>introspector 以 mock 提供预置元数据，目标库用 H2（MODE=MySQL）驱动真实 SQL
  * 路径：依赖拓扑、FK 采样、批量插入、主键回填、唯一约束兜底、两阶段循环插入。

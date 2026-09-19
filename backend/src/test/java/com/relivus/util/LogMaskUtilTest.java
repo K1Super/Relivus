@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * 日志脱敏工具测试（日志治理规范 §7）。
+ * 日志脱敏工具测试。
  */
 class LogMaskUtilTest {
 

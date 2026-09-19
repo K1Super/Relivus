@@ -16,7 +16,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 /**
- * SSE 进度推送器测试（DOC-08：连接上限 5003、事件名、心跳、断开清理）。
+ * SSE 进度推送器测试（连接上限、事件名、心跳、断开清理）。
  *
  * <p>SseEmitter.SseEventBuilder#build() 在 Spring 6.2 中返回
  * {@code Set<ResponseBodyEmitter.DataWithMediaType>}，因此事件名与负载统一从

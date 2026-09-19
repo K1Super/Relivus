@@ -115,7 +115,7 @@ function Editor({
 }
 
 /**
- * 列生成器配置（DOC-07 ColumnConfigForm）。
+ * 列生成器配置（ColumnConfigForm）。
  * 默认全部列由引擎按 自增 > 外键 > ENUM > CHECK > 列名启发式 自动推断，
  * 勾选后可自定义生成器与参数。
  */

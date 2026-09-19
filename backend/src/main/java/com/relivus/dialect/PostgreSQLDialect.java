@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * PostgreSQL 16 方言（DOC-01）。
+ * PostgreSQL 16 方言。
  *
  * <ul>
  *   <li>标识符双引号引用</li>

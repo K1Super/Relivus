@@ -21,7 +21,7 @@ const MaskingPage = lazy(() => import('@/pages/MaskingPage'));
 const TasksPage = lazy(() => import('@/pages/TasksPage'));
 const SettingsPage = lazy(() => import('@/pages/SettingsPage'));
 
-/** 鉴权失败（100003 / HTTP 401）统一跳转设置页（DOC-07 Token 管理）。 */
+/** 鉴权失败（100003 / HTTP 401）统一跳转设置页。 */
 function AuthRedirect() {
   const navigate = useNavigate();
   const location = useLocation();

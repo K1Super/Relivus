@@ -19,7 +19,7 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * 脱敏引擎跨表 JOIN 一致性集成测试（DOC-08 / DOC-04 方案 A）。
+ * 脱敏引擎跨表 JOIN 一致性集成测试。
  *
  * <p>orders.customer_name 与 customers.name 共享同一映射组：同原始值脱敏后
  * 仍保持一致，保证 JOIN 键在脱敏后仍可关联。

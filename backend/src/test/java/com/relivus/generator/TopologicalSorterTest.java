@@ -10,7 +10,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * 拓扑排序测试（DOC-08：无环、有环、自引用）。
+ * 拓扑排序测试（无环、有环、自引用）。
  */
 class TopologicalSorterTest {
 

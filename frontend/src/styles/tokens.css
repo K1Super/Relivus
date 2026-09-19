@@ -1,4 +1,4 @@
-/* tokens.css — 设计令牌（UI Development Specification 13.3 完整版） */
+/* tokens.css — 设计令牌（尺寸 / 颜色 / 字体等全局变量，组件级样式统一引用） */
 :root {
   /* 语义色 - Light */
   --color-primary: #1677ff;

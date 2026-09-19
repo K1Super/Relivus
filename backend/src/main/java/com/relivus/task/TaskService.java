@@ -21,9 +21,9 @@ import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * 任务服务（DOC-05 / DOC-11.7 取消设计）。
+ * 任务服务（取消设计）。
  *
- * <p>职责：任务创建、异步提交（线程池拒绝抛 5004）、状态机流转、取消（内存 AtomicBoolean +
+ * <p>职责：任务创建、异步提交（线程池拒绝）、状态机流转、取消（内存 AtomicBoolean +
  * 持久化 {@code df_task.cancel_requested} 双标志）、进度/日志落库与 SSE 推送桥接。
  * 自身不含业务执行逻辑（入口零业务逻辑），业务由 {@link TaskJob} 在 controller 层组装。
  */
@@ -68,9 +68,9 @@ public class TaskService {
     }
 
     /**
-     * 异步执行任务（DOC-11.7）。
+     * 异步执行任务。
      *
-     * <p>线程池拒绝（队列满）抛 5004。状态流转：
+     * <p>线程池拒绝（队列满）时抛异常。状态流转：
      * PENDING → RUNNING → SUCCESS / FAILED / CANCELLED。
      */
     public void executeAsync(Long taskId, TaskJob job) {
@@ -86,7 +86,7 @@ public class TaskService {
         running.put(taskId, future);
     }
 
-    /** 取消任务：持久化 cancel_requested + 内存标志 + 中断 Future（DOC-11.7 P0 补丁）。 */
+    /** 取消任务：持久化 cancel_requested + 内存标志 + 中断 Future。 */
     public boolean cancel(Long taskId) {
         TaskEntity entity = requireTask(taskId);
         if (entity.getStatus().isTerminal()) {
@@ -119,7 +119,7 @@ public class TaskService {
         return requireTask(taskId);
     }
 
-    /** 写入生成数据回看基线 JSON（DOC-06：执行开始前由生成流程采集后调用）。 */
+    /** 写入生成数据回看基线 JSON（执行开始前由生成流程采集后调用）。 */
     public void updateDataBaseline(Long taskId, String dataBaselineJson) {
         taskRepository.updateDataBaseline(taskId, dataBaselineJson);
     }
@@ -272,7 +272,7 @@ public class TaskService {
             if (flag.get()) {
                 return true;
             }
-            // 持久化标志双保险（DOC-11.7）；DB 检查节流 200ms
+            // 持久化标志双保险；DB 检查节流 200ms
             long now = System.currentTimeMillis();
             if (now - lastDbWriteMs < 200) {
                 return false;

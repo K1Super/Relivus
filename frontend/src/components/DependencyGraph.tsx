@@ -44,7 +44,7 @@ interface DependencyGraphProps {
 }
 
 /**
- * 表依赖图（React Flow 渲染，DOC-07）。
+ * 表依赖图（React Flow 渲染）。
  * 按拓扑序布局（父表在前）；外键构成有向边；循环依赖表的节点高亮。
  */
 export function DependencyGraph({ tables, order, cycles }: DependencyGraphProps) {

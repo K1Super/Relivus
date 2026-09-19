@@ -1,4 +1,4 @@
-# 生产环境（systemd + Nginx 部署，见 deploy/README-RUN.md）
+# 生产环境（systemd + Nginx 部署）
 server:
   port: 8080
   shutdown: graceful

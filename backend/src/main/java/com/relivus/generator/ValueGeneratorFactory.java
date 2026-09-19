@@ -19,7 +19,7 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * 值生成器解析工厂（DOC-03）。
+ * 值生成器解析工厂。
  *
  * <p>按「用户配置 > 自增跳过 > 外键列 > ENUM 列 > CHECK 约束 > 非自增主键 > 列名启发式 > 类型默认」
  * 顺序为列选择生成器。所有实例均为线程安全单例（sequence 有状态，单独新建）。

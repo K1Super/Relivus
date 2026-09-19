@@ -5,4 +5,4 @@
 --       「主键 > 基线」精确回看本次生成的行（truncate 模式基线为 0）。
 -- ============================================================
 
-ALTER TABLE df_task ADD COLUMN data_baseline_json TEXT NULL COMMENT '生成任务各表基线 MAX(pk) JSON（DOC-06 数据回看）';
+ALTER TABLE df_task ADD COLUMN data_baseline_json TEXT NULL COMMENT '生成任务各表基线 MAX(pk) JSON（数据回看）';

@@ -22,7 +22,7 @@ function formatCell(value: unknown): string {
 }
 
 /**
- * 生成数据回看弹窗（DOC-06）：任务成功后按表切换 + 服务端分页，
+ * 生成数据回看弹窗：任务成功后按表切换 + 服务端分页，
  * 直接可视化本次生成的行数据，无需再打开数据库客户端。
  */
 export function TaskDataModal({

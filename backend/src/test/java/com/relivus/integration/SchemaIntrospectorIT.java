@@ -11,7 +11,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * 双数据库内省集成测试（DOC-08 / DOC-02）。
+ * 双数据库内省集成测试。
  *
  * <p>在真实 MySQL / PostgreSQL 容器上验证：表、列、主键、外键、唯一索引、CHECK、
  * ENUM 的完整读取链路。

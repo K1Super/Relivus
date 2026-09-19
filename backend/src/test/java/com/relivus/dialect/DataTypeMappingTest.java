@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * 类型映射判断测试（DOC-01）。
+ * 类型映射判断测试。
  */
 class DataTypeMappingTest {
 

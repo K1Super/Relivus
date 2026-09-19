@@ -20,7 +20,7 @@ USE relivus_demo;
 -- ---------- 演示目标库结构 ----------
 CREATE TABLE users (
     id         BIGINT AUTO_INCREMENT PRIMARY KEY,
-    email      VARCHAR(255) NOT NULL COMMENT '登录邮箱，唯一，RFC 合规 ASCII 地址',
+    email      VARCHAR(255) NOT NULL COMMENT '登录邮箱，唯一，纯 ASCII 码（不含汉字）',
     name       VARCHAR(64) NOT NULL COMMENT '姓名（现代常用中文名，2~4 字）',
     age        INT NOT NULL COMMENT '年龄，约束 18~70',
     gender     ENUM ('男', '女') NOT NULL COMMENT '性别：男/女',

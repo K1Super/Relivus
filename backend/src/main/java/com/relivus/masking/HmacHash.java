@@ -10,7 +10,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HexFormat;
 
 /**
- * HMAC-SHA256 哈希（DOC-04）：输出十六进制，用于不可逆但需确定性一致的场景。
+ * HMAC-SHA256 哈希：输出十六进制，用于不可逆但需确定性一致的场景。
  *
  * <p>密钥为系统 HMAC_KEY（Base64 解码后的原始字节）；keyVersion 参与派生，
  * 升级密钥版本即可让历史值全部失效重算。
