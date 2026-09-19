@@ -210,7 +210,7 @@ erDiagram
 - **已发布迁移禁止修改**：历史迁移一经合入即冻结，结构调整统一通过新增版本迁移完成。
 - 双方言同步：每次结构变更须同时提供 MySQL 与 PostgreSQL 两个脚本，字段名与语义保持一致，禁止 MySQL 语法出现在 PG 脚本中。
 - Flyway 关闭 Spring Boot 自动迁移（`spring.flyway.enabled=false`），由 `FlywayConfig` 注入 `metaDataSource` 后按方言选择目录；`clean-disabled=true`、`baseline-on-migrate=true`。
-- 生产环境禁止 `flyway clean`；回滚依赖数据库备份恢复（`scripts/backup.sh` / `scripts/restore.sh`）。
+- 生产环境禁止 `flyway clean`；回滚依赖数据库备份恢复（`scripts/backup.bat` / `scripts/restore.bat`）。
 
 ## 关联文档
 

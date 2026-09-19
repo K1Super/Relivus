@@ -32,6 +32,26 @@ mvn clean package -DskipTests
 
 后端所有密钥与连接串经环境变量注入，`application.yml` 仅提供占位默认值与绑定结构。启动前必须设置以下变量，禁止将真实密钥硬编码进配置文件或版本库。
 
+推荐做法：**本地开发使用根目录 `.env` 文件 + 启动脚本**，配置一次后每次启动自动生效，无需反复 export。
+
+1. 复制模板并填写：
+
+```bash
+cp .env.example .env
+```
+
+`.env` 已被 `.gitignore` 忽略，不会进入版本库；模板 `.env.example` 提交到仓库且仅含占位符。
+
+2. 运行一键启动脚本（自动读取 `.env`、校验必填项与密钥格式后启动）：
+
+```bat
+:: Windows
+scripts\start-dev.bat
+scripts\start-dev.bat -skipbuild
+```
+
+也可以不使用 `.env`，直接手动注入环境变量（见下）。两种方式等价，后者适合 CI 或容器场景。
+
 | 环境变量 | 是否必填 | 说明 |
 |---|---|---|
 | RELIVUS_META_URL | 是 | 元数据库 JDBC 连接串，默认 `jdbc:mysql://127.0.0.1:3306/relivus_meta` |
@@ -98,14 +118,17 @@ CREATE DATABASE relivus_meta DEFAULT CHARACTER SET utf8mb4;
 
 ## 5 启动后端
 
-后端默认端口 `8080`，支持优雅停机。两种方式：
+后端默认端口 `8080`，支持优雅停机。启动方式：
 
-```bash
-# 方式一：直接运行 fat jar
+```bat
+:: 方式一：一键脚本（推荐，自动读取根目录 .env）
+scripts\start-dev.bat
+
+:: 方式二：直接运行 fat jar（需已注入环境变量）
 cd backend
-java -jar target/relivus.jar
+java -jar target\relivus.jar
 
-# 方式二：Spring Boot Maven 插件（开发常用，需已设置环境变量）
+:: 方式三：Spring Boot Maven 插件（开发常用，需已设置环境变量）
 mvn spring-boot:run
 ```
 

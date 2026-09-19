@@ -41,7 +41,7 @@ export function AppLayout({ children }: AppLayoutProps) {
       <header className={styles.header}>
         <div className={styles.logo}>
           <GitFork size={20} strokeWidth={2} aria-hidden="true" />
-          <span>Relivus 数据平台</span>
+          <span>Relivus</span>
         </div>
         <div className={styles.headerStatus}>
           <span>Bearer Token 鉴权</span>

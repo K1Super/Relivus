@@ -60,7 +60,9 @@
 ## 3. 启动
 
 ```bash
-./scripts/start.sh
+# 生产环境：systemd 已随服务安装自动拉起；本地/开发环境用：
+scripts/start-dev.bat          # Windows
+# 或先构建后端（跳测试）：cd backend && mvn clean package -DskipTests
 ```
 
 首次启动时 Flyway 自动迁移元数据库（`df_connection`、`df_task`、`df_task_log`、`df_mask_mapping`、`df_audit_log`），
@@ -85,7 +87,7 @@
 ## 6. 备份
 
 ```bash
-./scripts/backup.sh
+scripts/backup.bat             # Windows：scripts\backup.bat
 ```
 
 备份 `df_mask_mapping`、`df_task`、`df_task_log`、`df_audit_log` 四张元表到 `backups/`，文件名含时间戳。
@@ -94,7 +96,7 @@
 ## 7. 恢复
 
 ```bash
-./scripts/restore.sh backups/relivus_meta_xxx_TIMESTAMP.sql
+scripts/restore.bat backups\relivus_meta_xxx_TIMESTAMP.sql   # Windows
 ```
 
 ## 8. 重跑任务
@@ -106,7 +108,7 @@
 
 1. `systemctl stop relivus-backend`。
 2. 用第 7 步恢复数据库备份。
-3. 重新 `./scripts/start.sh`。
+3. 重新 `scripts/start-dev.bat`（或生产机 systemctl start relivus-backend）。
 
 > Flyway 不允许回退迁移；升级即回滚场景一律依赖数据库备份恢复，不要手工删除迁移记录。
 
@@ -130,5 +132,5 @@
 /etc/systemd/system/relivus-backend.service
 /var/www/relivus/               前端构建产物
 /etc/nginx/conf.d/relivus.conf  Nginx 反向代理与 SSE 配置
-backups/                        备份目录（由 scripts/backup.sh 创建）
+backups/                        备份目录（由 scripts/backup.bat 创建）
 ```
