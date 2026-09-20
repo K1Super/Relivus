@@ -39,7 +39,7 @@ class TaskServiceTest {
     private TaskLogRepository taskLogRepository;
     private ThreadPoolTaskExecutor taskExecutor;
     private TaskProgressNotifier notifier;
-    private TaskService service;
+    private ITaskService service;
 
     @BeforeEach
     void setUp() {
@@ -47,7 +47,7 @@ class TaskServiceTest {
         taskLogRepository = mock(TaskLogRepository.class);
         taskExecutor = mock(ThreadPoolTaskExecutor.class);
         notifier = mock(TaskProgressNotifier.class);
-        service = new TaskService(taskRepository, taskLogRepository, taskExecutor, notifier);
+        service = new TaskServiceImpl(taskRepository, taskLogRepository, taskExecutor, notifier);
     }
 
     /** 让 submit 同步执行 Runnable（ThreadPoolTaskExecutor 真实执行体是 private）。 */

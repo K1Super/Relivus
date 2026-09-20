@@ -23,15 +23,15 @@ import java.util.List;
  * apiKey 解密后仅在 {@link AiProviderConfig} 内存对象中短暂存在，绝不出现在日志与响应中。
  */
 @Service
-public class AiConfigService {
+public class AiConfigServiceImpl implements IAiConfigService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(AiConfigService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AiConfigServiceImpl.class);
 
     private final AiConfigRepository repository;
     private final CryptoService cryptoService;
     private final AiHttpClient aiHttpClient;
 
-    public AiConfigService(AiConfigRepository repository, CryptoService cryptoService,
+    public AiConfigServiceImpl(AiConfigRepository repository, CryptoService cryptoService,
                            AiHttpClient aiHttpClient) {
         this.repository = repository;
         this.cryptoService = cryptoService;
@@ -39,11 +39,13 @@ public class AiConfigService {
     }
 
     /** 全部配置列表。 */
+    @Override
     public List<AiConfigResponse> list() {
         return repository.findAll().stream().map(AiConfigResponse::from).toList();
     }
 
     /** 创建配置：apiKey 必填（非空白），重名抛资源冲突，密钥加密后落库。 */
+    @Override
     @Transactional
     public AiConfigResponse create(CreateAiConfigRequest request) {
         if (!request.hasApiKey()) {
@@ -63,6 +65,7 @@ public class AiConfigService {
     }
 
     /** 更新配置：apiKey 留空则保留旧密文，否则重新加密；updated_at 由 DB 维护。 */
+    @Override
     @Transactional
     public AiConfigResponse update(long id, CreateAiConfigRequest request) {
         AiConfigEntity entity = requireEntity(id);
@@ -81,6 +84,7 @@ public class AiConfigService {
     }
 
     /** 删除配置；若删除的是当前激活配置不做额外处理（生成时实时解析激活项）。 */
+    @Override
     @Transactional
     public void delete(long id) {
         requireEntity(id);
@@ -88,6 +92,7 @@ public class AiConfigService {
     }
 
     /** 激活配置：不存在抛 160001；先全部置非活跃再激活目标，保证单活跃。 */
+    @Override
     @Transactional
     public AiConfigResponse activate(long id) {
         requireEntity(id);
@@ -97,6 +102,7 @@ public class AiConfigService {
     }
 
     /** 连通性测试：ping 失败时 RelivusException（160002）原样上抛供前端展示。 */
+    @Override
     public AiTestResponse test(long id) {
         AiConfigEntity entity = requireEntity(id);
         AiProviderConfig cfg = toProviderConfig(entity);
@@ -105,6 +111,7 @@ public class AiConfigService {
     }
 
     /** 解析当前激活配置为内存明文对象；无激活配置抛 160001。 */
+    @Override
     public AiProviderConfig resolveActive() {
         AiConfigEntity entity = repository.findActive()
                 .orElseThrow(() -> new RelivusException(ErrorCode.AI_CONFIG_NOT_FOUND,
@@ -112,6 +119,7 @@ public class AiConfigService {
         return toProviderConfig(entity);
     }
 
+    @Override
     public AiConfigEntity requireEntity(long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RelivusException(ErrorCode.AI_CONFIG_NOT_FOUND,

@@ -150,11 +150,11 @@ Authorization: Bearer ${RELIVUS_TOKEN}
 
 ```json
 {
-  "name": "本地演示库",
+  "name": "本地目标库",
   "dbType": "postgresql",
   "host": "127.0.0.1",
   "port": 5432,
-  "database": "relivus_demo",
+  "database": "relivus_target",
   "username": "relivus",
   "password": "change-me-strong"
 }
@@ -181,11 +181,11 @@ Authorization: Bearer ${RELIVUS_TOKEN}
   "message": "success",
   "data": {
     "id": 1,
-    "name": "本地演示库",
+    "name": "本地目标库",
     "dbType": "postgresql",
     "host": "127.0.0.1",
     "port": 5432,
-    "database": "relivus_demo",
+    "database": "relivus_target",
     "username": "relivus",
     "createdAt": "2026-09-18T10:00:00",
     "updatedAt": "2026-09-18T10:00:00"

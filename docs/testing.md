@@ -194,7 +194,7 @@ npm run build
 
 ## 6 端到端演练
 
-按真实接口与数据校验走通主链路（以 PostgreSQL 演示库 `relivus_demo` 为例，先执行 `demo/postgresql/init.sql`）。
+按真实接口与数据校验走通主链路。以下示例以一个用户自建的 PostgreSQL 目标库（含 users / orders 表，参考结构见 [database-design.md](database-design.md) 第 3 节）为前提；命令中的库名、账号、连接 id、taskId 均为示例值，请替换为本地实际值。
 
 ```bash
 # 1. 健康检查
@@ -203,7 +203,7 @@ curl -sf http://127.0.0.1:8080/actuator/health
 # 2. 创建连接（返回连接 id，假设 2）
 curl -s -X POST http://127.0.0.1:8080/api/connections \
   -H "Authorization: Bearer $RELIVUS_TOKEN" -H "Content-Type: application/json" \
-  -d '{"name":"演示库","dbType":"postgresql","host":"127.0.0.1","port":5432,"database":"relivus_demo","username":"relivus","password":"change-me-strong"}'
+  -d '{"name":"测试目标库","dbType":"postgresql","host":"127.0.0.1","port":5432,"database":"relivus_target","username":"relivus","password":"change-me-strong"}'
 
 # 3. 测试连接
 curl -s -X POST http://127.0.0.1:8080/api/connections/2/test \
@@ -223,7 +223,7 @@ curl -s -X POST http://127.0.0.1:8080/api/generation/preview \
 # 6. 执行生成任务（返回 taskId）
 curl -s -X POST http://127.0.0.1:8080/api/generation/execute \
   -H "Authorization: Bearer $RELIVUS_TOKEN" -H "Content-Type: application/json" \
-  -H "Idempotency-Key: demo-gen-001" \
+  -H "Idempotency-Key: gen-001" \
   -d '{"connectionId":2,"tables":[{"table":"users","rowCount":1000},{"table":"orders","rowCount":5000}],"truncateBefore":true}'
 
 # 7. 订阅进度 SSE（另开终端）
@@ -240,13 +240,13 @@ curl -s http://127.0.0.1:8080/api/tasks/42 \
   -H "Authorization: Bearer $RELIVUS_TOKEN"
 ```
 
-数据质量校验 SQL（PostgreSQL，`relivus_demo` 库）：
+数据质量校验 SQL（PostgreSQL，目标库；基于 users / orders 参考表结构）：
 
 ```sql
 -- 年龄区间：users.age 应落在 18–70
 SELECT COUNT(*) AS out_of_range FROM users WHERE age < 18 OR age > 70;   -- 期望 0
 
--- 邮箱格式：email 应符合基础邮箱形态（demo 库 email 列为 UNIQUE 且 NOT NULL）
+-- 邮箱格式：email 应符合基础邮箱形态（参考结构中 email 列为 UNIQUE 且 NOT NULL）
 SELECT COUNT(*) AS bad_email
 FROM users
 WHERE email !~ '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$';      -- 期望 0
@@ -285,7 +285,7 @@ MySQL 等价写法：邮箱用 `email NOT REGEXP '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.
 
 ## 7 测试数据与隔离要求
 
-- 集成测试统一经 `AbstractDatabaseIT` 使用独立 Testcontainers 容器（MySQL 8.0 / PostgreSQL 16），库名 `relivus`、用户/密码 `relivus` / `relivus123`，与生产元库、演示目标库完全隔离。
+- 集成测试统一经 `AbstractDatabaseIT` 使用独立 Testcontainers 容器（MySQL 8.0 / PostgreSQL 16），库名 `relivus`、用户/密码 `relivus` / `relivus123`，与生产元库、本地目标库完全隔离。
 - 每个测试自建 DDL 结构，测试结束随容器销毁，不污染共享实例。
 - 单元测试不访问真实数据库；需持久化的组件（`TaskRepository` 等）使用测试替身或内存实现。
 - 涉及密钥的测试使用测试专用密钥，禁止复用生产 `RELIVUS_AES_KEY` / `RELIVUS_HMAC_KEY` / `RELIVUS_TOKEN`。

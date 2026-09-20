@@ -4,7 +4,7 @@ import com.relivus.common.exception.ErrorCode;
 import com.relivus.common.exception.RelivusException;
 import com.relivus.ai.AiHttpClient;
 import com.relivus.config.RelivusProperties;
-import com.relivus.service.AiConfigService;
+import com.relivus.service.IAiConfigService;
 import com.relivus.generator.ValueGeneratorFactory.ResolvedGenerator;
 import com.relivus.schema.model.CheckConstraintMetadata;
 import com.relivus.schema.model.ColumnMetadata;
@@ -176,7 +176,7 @@ class ValueGeneratorFactoryTest {
     @Test
     void aiBranchResolvesAiGeneratorWithPrompt() {
         ValueGeneratorFactory injected = new ValueGeneratorFactory();
-        injected.setAiSupport(mock(AiHttpClient.class), mock(AiConfigService.class), new RelivusProperties());
+        injected.setAiSupport(mock(AiHttpClient.class), mock(IAiConfigService.class), new RelivusProperties());
         ColumnMetadata column = col("bio", "VARCHAR", true, false, List.of());
 
         ResolvedGenerator resolved = injected.resolve(column, table(column), "ai", Map.of("prompt", "写一句话"));
@@ -188,7 +188,7 @@ class ValueGeneratorFactoryTest {
     @Test
     void aiBranchRequiresPrompt() {
         ValueGeneratorFactory injected = new ValueGeneratorFactory();
-        injected.setAiSupport(mock(AiHttpClient.class), mock(AiConfigService.class), new RelivusProperties());
+        injected.setAiSupport(mock(AiHttpClient.class), mock(IAiConfigService.class), new RelivusProperties());
         ColumnMetadata column = col("bio", "VARCHAR", true, false, List.of());
 
         assertThatThrownBy(() -> injected.resolve(column, table(column), "ai", null))

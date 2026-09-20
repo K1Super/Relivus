@@ -11,8 +11,8 @@ Relivus：数据库测试数据生成与脱敏系统。
 
 | 文档 | 用途 | 建议读者 |
 |---|---|---|
-| [SRS.md](SRS.md) | 需求规格说明，描述系统功能与非功能需求 | 产品、测试、开发 |
-| [high-level-design.md](high-level-design.md) | 总体设计，描述系统架构与模块划分 | 架构师、后端开发 |
+| [srs.md](srs.md) | 需求规格说明，描述系统功能与非功能需求 | 产品、测试、开发 |
+| [architecture.md](architecture.md) | 总体设计，描述系统架构与模块划分 | 架构师、后端开发 |
 | [database-design.md](database-design.md) | 数据库设计，描述数据模型与元库表结构 | 后端开发、DBA |
 | [api-spec.md](api-spec.md) | 接口规范，定义 REST API 契约 | 前后端开发 |
 | [getting-started.md](getting-started.md) | 快速开始，说明环境准备与启动步骤 | 新人、所有开发者 |
@@ -25,7 +25,7 @@ Relivus：数据库测试数据生成与脱敏系统。
 
 ## 推荐阅读路径
 
-- 新人入门：getting-started → SRS → high-level-design → coding-standards
+- 新人入门：getting-started → srs → architecture → coding-standards
 - 接口开发：api-spec + coding-standards
 - 部署上线：deployment-guide + troubleshooting
 

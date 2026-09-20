@@ -5,7 +5,7 @@ import com.relivus.masking.MaskingListener;
 import com.relivus.masking.MaskingListener.Severity;
 
 /**
- * 任务执行上下文（由 TaskService 注入给 {@link TaskJob}）。
+ * 任务执行上下文（由 ITaskService 注入给 {@link TaskJob}）。
  *
  * <p>为生成/脱敏引擎提供进度、日志与取消令牌的桥接；同时暴露两类引擎监听器，
  * 引擎每批处理后回调即更新任务状态与 SSE 推送。

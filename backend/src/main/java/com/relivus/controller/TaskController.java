@@ -7,8 +7,8 @@ import com.relivus.dto.TaskDataPage;
 import com.relivus.dto.TaskGeneratedTable;
 import com.relivus.dto.TaskResponse;
 import com.relivus.entity.TaskEntity;
-import com.relivus.task.TaskDataService;
-import com.relivus.task.TaskService;
+import com.relivus.task.ITaskDataService;
+import com.relivus.task.ITaskService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.validation.annotation.Validated;
@@ -33,10 +33,10 @@ import java.util.List;
 @RequestMapping("/api/tasks")
 public class TaskController {
 
-    private final TaskService taskService;
-    private final TaskDataService taskDataService;
+    private final ITaskService taskService;
+    private final ITaskDataService taskDataService;
 
-    public TaskController(TaskService taskService, TaskDataService taskDataService) {
+    public TaskController(ITaskService taskService, ITaskDataService taskDataService) {
         this.taskService = taskService;
         this.taskDataService = taskDataService;
     }
@@ -81,9 +81,9 @@ public class TaskController {
     }
 
     private static void validatePagination(int limit, int offset) {
-        if (limit < 1 || limit > TaskDataService.MAX_LIMIT) {
+        if (limit < 1 || limit > ITaskDataService.MAX_LIMIT) {
             throw new RelivusException(ErrorCode.VALIDATION_FAILED,
-                    "limit 必须在 1-" + TaskDataService.MAX_LIMIT + " 之间");
+                    "limit 必须在 1-" + ITaskDataService.MAX_LIMIT + " 之间");
         }
         if (offset < 0) {
             throw new RelivusException(ErrorCode.VALIDATION_FAILED, "offset 必须 >= 0");

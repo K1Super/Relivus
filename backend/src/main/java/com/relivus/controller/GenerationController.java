@@ -12,9 +12,9 @@ import com.relivus.dto.TaskResponse;
 import com.relivus.generator.DataGenerationEngine;
 import com.relivus.generator.GenerationRunResult;
 import com.relivus.repository.AuditLogRepository;
-import com.relivus.service.ConnectionService;
-import com.relivus.task.TaskDataService;
-import com.relivus.task.TaskService;
+import com.relivus.service.IConnectionService;
+import com.relivus.task.ITaskDataService;
+import com.relivus.task.ITaskService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -53,16 +53,16 @@ public class GenerationController {
     /** 预览时每表行数上限。 */
     private static final int PREVIEW_ROWS_PER_TABLE = 5;
 
-    private final ConnectionService connectionService;
+    private final IConnectionService connectionService;
     private final DataGenerationEngine engine;
-    private final TaskService taskService;
-    private final TaskDataService taskDataService;
+    private final ITaskService taskService;
+    private final ITaskDataService taskDataService;
     private final IdempotencyGuard idempotencyGuard;
     private final ObjectMapper objectMapper;
     private final AuditLogRepository auditLogRepository;
 
-    public GenerationController(ConnectionService connectionService, DataGenerationEngine engine,
-                                TaskService taskService, TaskDataService taskDataService,
+    public GenerationController(IConnectionService connectionService, DataGenerationEngine engine,
+                                ITaskService taskService, ITaskDataService taskDataService,
                                 IdempotencyGuard idempotencyGuard,
                                 ObjectMapper objectMapper, AuditLogRepository auditLogRepository) {
         this.connectionService = connectionService;

@@ -358,8 +358,8 @@
 ## 关联文档
 
 - [README.md](README.md)（文档导航）
-- [SRS.md](SRS.md)（需求规格说明）
-- [high-level-design.md](high-level-design.md)（总体设计）
+- [srs.md](srs.md)（需求规格说明）
+- [architecture.md](architecture.md)（总体设计）
 - [database-design.md](database-design.md)（数据库设计）
 - [api-spec.md](api-spec.md)（接口规范与错误码）
 - [testing.md](testing.md)（测试说明）

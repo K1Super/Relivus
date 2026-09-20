@@ -135,7 +135,7 @@ Relivus 的数据库分为两个角色：
 
 ## 3. 目标库约定
 
-目标库由用户自行配置，Relivus 不迁移其结构。示例目标库 `relivus_demo`（`demo/postgresql/init.sql`）覆盖 ENUM、CHECK、UNIQUE 与外键，作为内省与生成的演示基准。
+目标库由用户自行配置，Relivus 不迁移其结构、不提供初始化脚本；目标库的表、枚举、约束均由用户自行创建。下文 `users` / `orders` 仅作为覆盖 ENUM、CHECK、UNIQUE 与外键的参考示例结构，用于说明内省与生成所依赖的目标库特征，用户可照此在自己的目标库中准备演练数据。
 
 **users 表**：
 
@@ -214,7 +214,7 @@ erDiagram
 
 ## 关联文档
 
-- [SRS.md](SRS.md) — 需求规格说明
-- [high-level-design.md](high-level-design.md) — 总体设计
+- [srs.md](srs.md) — 需求规格说明
+- [architecture.md](architecture.md) — 总体设计
 - [api-spec.md](api-spec.md) — 接口规范与错误码
 - [coding-standards.md](coding-standards.md) — 编码规范（含 SQL 与迁移规范）

@@ -3,7 +3,7 @@ package com.relivus.generator;
 /**
  * 生成引擎运行监听器（任务进度回调）。
  *
- * <p>引擎在批量完成、异常、取消等节点回调，由任务执行层（TaskService）桥接为
+ * <p>引擎在批量完成、异常、取消等节点回调，由任务执行层（ITaskService）桥接为
  * 进度日志与 SSE 推送。实现必须线程安全且不阻塞生成主循环。
  */
 public interface GenerationEngineListener {

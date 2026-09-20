@@ -14,13 +14,25 @@
 
 ## 2. 首次部署
 
-1. 初始化元数据库与演示目标库（任选其一）：
+1. 初始化元数据库（任选其一，仅建库建用户；元库表结构由 Flyway 自动迁移）：
 
-   - PostgreSQL：`psql -h 127.0.0.1 -U postgres -f demo/postgresql/init.sql`
-   - MySQL：`mysql -h 127.0.0.1 -u root -p < demo/mysql/init.sql`
+   - PostgreSQL：
 
-   元库建库建用户；**元库表结构由应用启动时 Flyway 自动迁移**（只迁移元库，绝不迁移目标库）。
-   目标库表结构由用户在 UI 中配置连接后自行建表（可参考 `demo/` 下脚本）。
+     ```sql
+     CREATE USER relivus WITH PASSWORD 'change-me-strong';
+     CREATE DATABASE relivus_meta OWNER relivus;
+     ```
+
+   - MySQL（必须指定 utf8mb4）：
+
+     ```sql
+     CREATE DATABASE relivus_meta DEFAULT CHARACTER SET utf8mb4;
+     CREATE USER 'relivus'@'%' IDENTIFIED BY 'change-me-strong';
+     GRANT ALL PRIVILEGES ON relivus_meta.* TO 'relivus'@'%';
+     ```
+
+   **元库表结构由应用启动时 Flyway 自动迁移**（只迁移元库，绝不迁移目标库）。
+   目标库表结构由用户自行创建，Relivus 不提供示例库初始化脚本；冒烟校验所需的 users / orders 参考表结构见 `docs/database-design.md` 第 3 节。
 
 2. 部署后端：
 
@@ -61,7 +73,7 @@
 
 ```bash
 # 生产环境：systemd 已随服务安装自动拉起；本地/开发环境用：
-scripts/start-dev.bat          # Windows
+.\scripts\start-dev.ps1        # Windows PowerShell
 # 或先构建后端（跳测试）：cd backend && mvn clean package -DskipTests
 ```
 
@@ -80,8 +92,8 @@ scripts/start-dev.bat          # Windows
 
 1. 设置页保存 Token。
 2. 连接管理：创建元库同实例的目标库连接并"测试连接"。
-3. Schema 扫描：确认能读到 users / orders 的表、列、索引、外键、ENUM、CHECK。
-4. 生成：配置 1000 行写入演示目标库，任务页观察 SSE 实时进度，完成后在目标库核对行数。
+3. Schema 扫描：确认能读到目标表（如 users / orders）的表、列、索引、外键、ENUM、CHECK。
+4. 生成：配置 1000 行写入目标库，任务页观察 SSE 实时进度，完成后在目标库核对行数。
 5. 脱敏：对同一连接执行脱敏，再执行 JOIN 验证（验证通过率 100%）。
 
 ## 6. 备份
@@ -108,7 +120,7 @@ scripts/restore.bat backups\relivus_meta_xxx_TIMESTAMP.sql   # Windows
 
 1. `systemctl stop relivus-backend`。
 2. 用第 7 步恢复数据库备份。
-3. 重新 `scripts/start-dev.bat`（或生产机 systemctl start relivus-backend）。
+3. 重新启动：本地执行 `.\scripts\start-dev.ps1`（或生产机 `systemctl start relivus-backend`）。
 
 > Flyway 不允许回退迁移；升级即回滚场景一律依赖数据库备份恢复，不要手工删除迁移记录。
 
@@ -118,7 +130,7 @@ scripts/restore.bat backups\relivus_meta_xxx_TIMESTAMP.sql   # Windows
 | --- | --- | --- |
 | 健康检查失败 | 元库连接信息错误 / 未启动 | 检查 `/etc/relivus/relivus.env`、数据库可达性与 Flyway 迁移日志 |
 | 端口 8080 被占用 | 旧实例仍在运行 | `systemctl stop relivus-backend` 或处理占用进程 |
-| API 返回 401 / code 9001 | 未携带 Token 或 Token 错误 | 检查请求头 `Authorization: Bearer <TOKEN>` |
+| API 返回 401 / code 100003 | 未携带 Token 或 Token 错误 | 检查请求头 `Authorization: Bearer <TOKEN>` |
 | SSE 进度断线 | Nginx `proxy_buffering` 未关 / 超时过短 | 确认使用 `deploy/nginx-relivus.conf`（buffering off、read_timeout 30m） |
 | 生成/脱敏冲突 | 目标表唯一键冲突、映射表被并发写 | 生成走查重兜底自动重试；脱敏映射表冲突时清理 `df_mask_mapping` 后重跑 |
 | SWAGGER 界面 | 默认关闭 | 设置 `RELIVUS_SWAGGER_ENABLED=true` 后重启 |

@@ -10,6 +10,9 @@ rem   set RELIVUS_BASE_URL=http://host:8080 && scripts\verify-deploy.bat
 rem Target DB overrides:
 rem   VERIFY_DB_HOST / VERIFY_DB_PORT / VERIFY_DB_NAME /
 rem   VERIFY_DB_USER / VERIFY_DB_PASS / VERIFY_DB_TYPE
+rem Prerequisite: the target database must already exist and contain
+rem users/orders tables (reference schema: docs/database-design.md
+rem section 3); Relivus does not create or migrate target schemas.
 rem Creates a one-time connection "relivus-verify" (recreated if exists).
 rem ============================================================
 setlocal enabledelayedexpansion
@@ -34,7 +37,7 @@ if "%TOKEN%"=="" (
 
 if "%VERIFY_DB_HOST%"=="" set "VERIFY_DB_HOST=127.0.0.1"
 if "%VERIFY_DB_PORT%"=="" set "VERIFY_DB_PORT=5432"
-if "%VERIFY_DB_NAME%"=="" set "VERIFY_DB_NAME=relivus_demo"
+if "%VERIFY_DB_NAME%"=="" set "VERIFY_DB_NAME=relivus_target"
 if "%VERIFY_DB_USER%"=="" set "VERIFY_DB_USER=postgres"
 if "%VERIFY_DB_PASS%"=="" set "VERIFY_DB_PASS=postgres"
 if "%VERIFY_DB_TYPE%"=="" set "VERIFY_DB_TYPE=postgresql"

@@ -33,12 +33,12 @@ flowchart TB
             C3["GlobalExceptionHandler"]
         end
         subgraph Service["服务层"]
-            S1["ConnectionService"]
+            S1["IConnectionService"]
             S2["SchemaIntrospector"]
             S3["DataGenerationEngine"]
             S4["MaskingEngine"]
-            S5["TaskService"]
-            S6["AiConfigService"]
+            S5["ITaskService"]
+            S6["IAiConfigService"]
             S7["CryptoService"]
         end
         subgraph Core["核心抽象"]
@@ -84,9 +84,9 @@ flowchart TB
 | `com.relivus.schema` | 目标库结构内省、领域模型与缓存 | `SchemaIntrospector`、`JdbcSchemaIntrospector`、`SchemaCache`、`CheckConstraintParser`、`model.*` |
 | `com.relivus.generator` | 测试数据生成引擎、依赖图、值生成器与批量插入 | `DataGenerationEngine`、`TableDependencyGraph`、`TopologicalSorter`、`ValueGeneratorFactory`、`ValueGenerator`（及内置实现）、`UniqueConstraintChecker`、`ForeignKeySampler`、`BatchInserter`、`AiGenerator` |
 | `com.relivus.masking` | 脱敏算法、全局映射一致性与 JOIN 验证 | `MaskingAlgorithm`（及内置实现）、`MaskingEngine`、`GlobalMaskingContext`、`MaskMappingRepository`、`RelatedColumnDetector`、`JoinConsistencyVerifier` |
-| `com.relivus.task` | 统一任务模型、异步执行、取消与 SSE | `TaskService`、`TaskJob`、`TaskContext`、`TaskStatus`、`TaskProgressNotifier`、`SseTaskProgressNotifier`、`SseProgressController` |
+| `com.relivus.task` | 统一任务模型、异步执行、取消与 SSE | `ITaskService` / `TaskServiceImpl`、`ITaskDataService` / `TaskDataServiceImpl`、`TaskJob`、`TaskContext`、`TaskStatus`、`TaskProgressNotifier`、`SseTaskProgressNotifier`、`SseProgressController` |
 | `com.relivus.ai` | OpenAI 兼容上游客户端 | `AiHttpClient`、`RestClientAiHttpClient`、`AiProviderConfig` |
-| `com.relivus.service` | 业务编排（连接、AI 配置、加解密） | `ConnectionService`、`AiConfigService`、`CryptoService`、`TargetDataSourceRegistry` |
+| `com.relivus.service` | 业务编排（连接、AI 配置、加解密） | `IConnectionService` / `ConnectionServiceImpl`、`IAiConfigService` / `AiConfigServiceImpl`、`CryptoService`、`TargetDataSourceRegistry` |
 | `com.relivus.controller` / `dto` | REST API 与请求 / 响应 DTO | `ConnectionController`、`SchemaController`、`GenerationController`、`MaskingController`、`TaskController`、`AiConfigController` |
 | `com.relivus.repository` / `entity` | 元库数据访问与实体映射 | `ConnectionRepository`、`TaskRepository`、`TaskLogRepository`、`MaskMappingRepository`、`AuditLogRepository`、`AiConfigRepository` |
 | `com.relivus.common` | 统一响应、异常、错误码、幂等 | `ApiResponse`、`RelivusException`、`ErrorCode`、`GlobalExceptionHandler`、`IdempotencyGuard` |
@@ -126,7 +126,7 @@ flowchart TB
 ### 4.4 任务异步与 SSE
 
 - 统一任务表 `df_task`，状态机 `PENDING -> RUNNING -> SUCCESS / FAILED / CANCELLED`。
-- `TaskService` 管理 `Map<Long, Future<?>>` 与 `Map<Long, AtomicBoolean>`，每批完成后检查取消标志。
+- `TaskServiceImpl` 管理 `Map<Long, Future<?>>` 与 `Map<Long, AtomicBoolean>`，每批完成后检查取消标志。
 - 线程池 core 4 / max 8 / queue 100，拒绝策略抛 `150004`。
 - SSE 统一路径 `/api/tasks/{id}/progress`，按 taskId 维护 `Map<Long, Set<SseEmitter>>`，最大连接 20、心跳 15 秒、超时 30 分钟；事件 `progress` / `log` / `done` / `error` / `heartbeat`。
 
@@ -164,7 +164,7 @@ flowchart TB
 sequenceDiagram
     participant U as 用户/前端
     participant C as GenerationController
-    participant S as TaskService
+    participant S as TaskServiceImpl
     participant E as DataGenerationEngine
     participant I as SchemaIntrospector
     participant T as 目标库
@@ -188,7 +188,7 @@ sequenceDiagram
 sequenceDiagram
     participant U as 用户/前端
     participant C as MaskingController
-    participant S as TaskService
+    participant S as TaskServiceImpl
     participant M as MaskingEngine
     participant G as GlobalMaskingContext
     participant V as JoinConsistencyVerifier
@@ -239,7 +239,7 @@ sequenceDiagram
 
 ## 关联文档
 
-- [SRS.md](SRS.md) — 需求规格说明
+- [srs.md](srs.md) — 需求规格说明
 - [database-design.md](database-design.md) — 数据库设计
 - [api-spec.md](api-spec.md) — 接口规范与错误码
 - [coding-standards.md](coding-standards.md) — 编码规范

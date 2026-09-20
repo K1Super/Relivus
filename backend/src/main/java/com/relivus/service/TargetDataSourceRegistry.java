@@ -109,7 +109,7 @@ public class TargetDataSourceRegistry {
         return ds;
     }
 
-    /** 连接参数（由 ConnectionService 从实体 + 方言装配，密码不为空时使用）。 */
+    /** 连接参数（由 IConnectionService 从实体 + 方言装配，密码不为空时使用）。 */
     public record ConnectionParams(String jdbcUrl, String username, String password, String driverClassName) {
     }
 

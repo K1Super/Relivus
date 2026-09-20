@@ -28,15 +28,15 @@ jobs:
       - name: Verify with Maven
         run: mvn -B verify --no-transfer-progress
 
-      # 校验本地启动脚本与 .env 模板（bat 为 Windows 一键启动，语法由 PowerShell 解析器检查）
+      # 校验本地启动脚本与 .env 模板（Windows 一键启动为 PowerShell 脚本，仅做存在性与关键配置项检查）
       - name: Check dev startup script
         working-directory: ..
         run: |
-          [[ -f scripts/start-dev.bat ]] || { echo "start-dev.bat missing"; exit 1; }
+          [[ -f scripts/start-dev.ps1 ]] || { echo "start-dev.ps1 missing"; exit 1; }
           [[ -f .env.example ]] && grep -q 'RELIVUS_META_PASSWORD' .env.example
 
   frontend:
-    name: Frontend (Vitest)
+    name: Frontend (build + Vitest)
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -54,6 +54,10 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      # 类型检查 + 生产构建（tsc --noEmit 门禁，SRS 验收标准要求 npm run build 成功）
+      - name: Type-check and build
+        run: npm run build
 
       - name: Run tests
         run: npm test

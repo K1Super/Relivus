@@ -4,7 +4,7 @@ import com.relivus.common.api.ApiResponse;
 import com.relivus.dto.AiConfigResponse;
 import com.relivus.dto.AiTestResponse;
 import com.relivus.dto.CreateAiConfigRequest;
-import com.relivus.service.AiConfigService;
+import com.relivus.service.IAiConfigService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -27,9 +27,9 @@ import java.util.List;
 @RequestMapping("/api/ai/configs")
 public class AiConfigController {
 
-    private final AiConfigService aiConfigService;
+    private final IAiConfigService aiConfigService;
 
-    public AiConfigController(AiConfigService aiConfigService) {
+    public AiConfigController(IAiConfigService aiConfigService) {
         this.aiConfigService = aiConfigService;
     }
 

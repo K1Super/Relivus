@@ -28,9 +28,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * 自身不含业务执行逻辑（入口零业务逻辑），业务由 {@link TaskJob} 在 controller 层组装。
  */
 @Service
-public class TaskService {
+public class TaskServiceImpl implements ITaskService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(TaskService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TaskServiceImpl.class);
 
     private final TaskRepository taskRepository;
     private final TaskLogRepository taskLogRepository;
@@ -42,7 +42,7 @@ public class TaskService {
     /** 运行中任务：taskId → 取消标志（引擎每批轮询）。 */
     private final Map<Long, AtomicBoolean> cancelFlags = new ConcurrentHashMap<>();
 
-    public TaskService(TaskRepository taskRepository, TaskLogRepository taskLogRepository,
+    public TaskServiceImpl(TaskRepository taskRepository, TaskLogRepository taskLogRepository,
                        @Qualifier(TaskExecutorConfig.TASK_EXECUTOR) ThreadPoolTaskExecutor taskExecutor,
                        TaskProgressNotifier notifier) {
         this.taskRepository = taskRepository;
@@ -52,6 +52,7 @@ public class TaskService {
     }
 
     /** 创建任务（PENDING），返回 taskId。configJson 为执行配置 JSON（含敏感信息须先脱敏或存引用）。 */
+    @Override
     public Long createTask(String taskType, Long connectionId, String configJson) {
         TaskEntity entity = new TaskEntity();
         entity.setTaskType(taskType);
@@ -73,6 +74,7 @@ public class TaskService {
      * <p>线程池拒绝（队列满）时抛异常。状态流转：
      * PENDING → RUNNING → SUCCESS / FAILED / CANCELLED。
      */
+    @Override
     public void executeAsync(Long taskId, TaskJob job) {
         AtomicBoolean flag = new AtomicBoolean(false);
         cancelFlags.put(taskId, flag);
@@ -87,6 +89,7 @@ public class TaskService {
     }
 
     /** 取消任务：持久化 cancel_requested + 内存标志 + 中断 Future。 */
+    @Override
     public boolean cancel(Long taskId) {
         TaskEntity entity = requireTask(taskId);
         if (entity.getStatus().isTerminal()) {
@@ -115,15 +118,18 @@ public class TaskService {
         return true;
     }
 
+    @Override
     public TaskEntity getTask(Long taskId) {
         return requireTask(taskId);
     }
 
     /** 写入生成数据回看基线 JSON（执行开始前由生成流程采集后调用）。 */
+    @Override
     public void updateDataBaseline(Long taskId, String dataBaselineJson) {
         taskRepository.updateDataBaseline(taskId, dataBaselineJson);
     }
 
+    @Override
     public List<TaskEntity> listTasks(int limit, int offset) {
         return taskRepository.findAll(limit, offset);
     }

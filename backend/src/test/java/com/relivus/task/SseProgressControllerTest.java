@@ -25,7 +25,7 @@ class SseProgressControllerTest {
 
     @Test
     void progressRegistersEmitterAndReturnsEventStream() throws Exception {
-        TaskService taskService = mock(TaskService.class);
+        ITaskService taskService = mock(ITaskService.class);
         SseTaskProgressNotifier notifier = mock(SseTaskProgressNotifier.class);
         TaskEntity task = new TaskEntity();
         task.setId(5L);

@@ -16,8 +16,8 @@ import com.relivus.masking.JoinConsistencyVerifier;
 import com.relivus.masking.JoinConsistencyVerifier.JoinVerificationResult;
 import com.relivus.masking.MaskingEngine;
 import com.relivus.repository.AuditLogRepository;
-import com.relivus.service.ConnectionService;
-import com.relivus.task.TaskService;
+import com.relivus.service.IConnectionService;
+import com.relivus.task.ITaskService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -58,15 +58,15 @@ public class MaskingController {
     private static final java.util.regex.Pattern IDENTIFIER_PATTERN =
             java.util.regex.Pattern.compile("[A-Za-z0-9_]+");
 
-    private final ConnectionService connectionService;
+    private final IConnectionService connectionService;
     private final MaskingEngine engine;
-    private final TaskService taskService;
+    private final ITaskService taskService;
     private final IdempotencyGuard idempotencyGuard;
     private final ObjectMapper objectMapper;
     private final AuditLogRepository auditLogRepository;
 
-    public MaskingController(ConnectionService connectionService, MaskingEngine engine,
-                             TaskService taskService, IdempotencyGuard idempotencyGuard,
+    public MaskingController(IConnectionService connectionService, MaskingEngine engine,
+                             ITaskService taskService, IdempotencyGuard idempotencyGuard,
                              ObjectMapper objectMapper, AuditLogRepository auditLogRepository) {
         this.connectionService = connectionService;
         this.engine = engine;

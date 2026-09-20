@@ -44,10 +44,10 @@ cp .env.example .env
 
 2. 运行一键启动脚本（自动读取 `.env`、校验必填项与密钥格式后启动）：
 
-```bat
-:: Windows
-scripts\start-dev.bat
-scripts\start-dev.bat -skipbuild
+```powershell
+# Windows PowerShell
+.\scripts\start-dev.ps1
+.\scripts\start-dev.ps1 -SkipBuild   # 跳过构建，直接启动已有 jar
 ```
 
 也可以不使用 `.env`，直接手动注入环境变量（见下）。两种方式等价，后者适合 CI 或容器场景。
@@ -100,35 +100,34 @@ $env:RELIVUS_HMAC_KEY='<openssl rand -base64 32 的结果>'
 
 ## 4 初始化元库
 
-元数据库表结构由后端启动时 Flyway 自动迁移（只迁移元库，目标库绝不跑 Flyway）。首次启动前仅需创建数据库与用户，无需手动建表。可直接使用 `demo/` 目录脚本一并创建元库与演示目标库：
-
-```bash
-# PostgreSQL
-psql -h 127.0.0.1 -U postgres -f demo/postgresql/init.sql
-
-# MySQL
-mysql -h 127.0.0.1 -u root -p < demo/mysql/init.sql
-```
-
-脚本会创建应用用户 `relivus`、元库 `relivus_meta`、演示目标库 `relivus_demo`（含 `users` / `orders` 表，覆盖 ENUM / CHECK / UNIQUE / 外键）。脚本内密码为占位值 `change-me-strong`，正式使用前必须改为强密码并同步到环境变量。若手动建库，MySQL 需指定 `utf8mb4`：
+元数据库表结构由后端启动时 Flyway 自动迁移（只迁移元库，目标库绝不跑 Flyway）。首次启动前仅需创建元数据库与应用用户，无需手动建表：
 
 ```sql
+-- PostgreSQL
+CREATE USER relivus WITH PASSWORD 'change-me-strong';
+CREATE DATABASE relivus_meta OWNER relivus;
+
+-- MySQL（必须指定 utf8mb4）
 CREATE DATABASE relivus_meta DEFAULT CHARACTER SET utf8mb4;
+CREATE USER 'relivus'@'%' IDENTIFIED BY 'change-me-strong';
+GRANT ALL PRIVILEGES ON relivus_meta.* TO 'relivus'@'%';
 ```
+
+SQL 中的密码为占位值 `change-me-strong`，正式使用前必须改为强密码并同步到环境变量。**目标库（被生成/脱敏的业务库）由用户自行创建表结构，Relivus 不提供示例库脚本、不迁移目标库。**
 
 ## 5 启动后端
 
 后端默认端口 `8080`，支持优雅停机。启动方式：
 
-```bat
-:: 方式一：一键脚本（推荐，自动读取根目录 .env）
-scripts\start-dev.bat
+```powershell
+# 方式一：一键脚本（推荐，自动读取根目录 .env）
+.\scripts\start-dev.ps1
 
-:: 方式二：直接运行 fat jar（需已注入环境变量）
+# 方式二：直接运行 fat jar（需已注入环境变量）
 cd backend
 java -jar target\relivus.jar
 
-:: 方式三：Spring Boot Maven 插件（开发常用，需已设置环境变量）
+# 方式三：Spring Boot Maven 插件（开发常用，需已设置环境变量）
 mvn spring-boot:run
 ```
 
@@ -161,29 +160,24 @@ http://localhost:5173
 
 ## 7 五分钟快速验证
 
-1. 启动元库，设置 6 项环境变量，执行 `demo/` 对应方言的 init.sql。
+1. 启动元库，设置 6 项环境变量，按第 4 节创建元数据库与用户。
 2. 启动后端，`curl http://127.0.0.1:8080/actuator/health` 返回 `UP`。
 3. 启动前端，浏览器打开 `http://localhost:5173`，在设置页填入 Token。
-4. 新建连接：选择 `postgresql`，主机 `127.0.0.1`、端口 `5432`、数据库 `relivus_demo`、用户名/密码 `relivus` / `change-me-strong`，点击测试连接成功。
-5. Schema 页内省：查看 `users`、`orders` 表及其外键与 CHECK 约束。
-6. 生成页配置 `users` 1000 行、`orders` 5000 行，先预览（每表 ≤5 行）再执行，观察 SSE 进度条推进至 SUCCESS。
-7. 脱敏页对 `users.email` 选择 hmac 算法执行，验证同列同值结果一致。
-8. 任务页确认任务状态为 SUCCESS，并可用 psql 校验行数与约束（SQL 见 [testing.md](testing.md) 第 6 节）。
+4. 新建连接：选择目标库方言，填入主机、端口、数据库名、用户名/密码（均为你自建目标库的真实信息），点击测试连接成功。
+5. Schema 页内省：查看目标表及其外键与 CHECK 约束。
+6. 生成页配置目标表行数，先预览（每表 ≤5 行）再执行，观察 SSE 进度条推进至 SUCCESS。
+7. 脱敏页对邮箱等列选择 hmac 算法执行，验证同列同值结果一致。
+8. 任务页确认任务状态为 SUCCESS，并可用 psql / mysql 客户端校验行数与约束（SQL 见 [testing.md](testing.md) 第 6 节，需按你的目标表结构调整）。
 9. （可选）AI 生成：设置页新建 AI 配置（OpenAI 兼容 baseUrl + apiKey + model）并激活、测试连通，随后在生成页把某列生成器选为 `ai`。
 
-## 8 示例数据
+## 8 目标库准备
 
-`demo/` 下按方言提供初始化脚本，同时完成元库与演示目标库的创建：
-
-| 文件 | 方言 | 执行方式 |
-|---|---|---|
-| demo/postgresql/init.sql | PostgreSQL | `psql -h 127.0.0.1 -U postgres -f demo/postgresql/init.sql` |
-| demo/mysql/init.sql | MySQL | `mysql -h 127.0.0.1 -u root -p < demo/mysql/init.sql` |
-
-演示目标库 `relivus_demo` 结构：
+Relivus 不随仓库分发示例库脚本，目标库需要用户自行准备。为便于演练与冒烟校验（`scripts/verify-deploy.bat`），建议在目标库中创建覆盖 ENUM、CHECK、UNIQUE 与外键的参考表：
 
 - `users`：`id`（自增主键）、`email`（NOT NULL + UNIQUE）、`name`、`age`（CHECK 18–70）、`gender`（ENUM）、`balance`、`created_at`。
 - `orders`：`id`（自增主键）、`user_id`（外键 → users.id）、`amount`（CHECK > 0）、`status`（ENUM）、`created_at`。
+
+字段的完整类型与约束可参考 [database-design.md](database-design.md) 第 3 节，按目标库方言自行编写 DDL。
 
 目标库由用户在 UI 中配置连接，Relivus 不迁移目标库；仅元库 `relivus_meta` 由 Flyway 迁移。
 

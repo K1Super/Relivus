@@ -14,7 +14,7 @@ import com.relivus.entity.TaskEntity;
 import com.relivus.schema.SchemaIntrospector;
 import com.relivus.schema.model.ColumnMetadata;
 import com.relivus.schema.model.TableMetadata;
-import com.relivus.service.ConnectionService;
+import com.relivus.service.IConnectionService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -47,15 +47,15 @@ class TaskDataServiceTest {
     private static final DataSource H2 = new DriverManagerDataSource(
             "jdbc:h2:mem:taskdata;MODE=MySQL;DB_CLOSE_DELAY=-1", "sa", "");
 
-    private ConnectionService connectionService;
+    private IConnectionService connectionService;
     private SchemaIntrospector introspector;
-    private TaskDataService service;
+    private ITaskDataService service;
 
     @BeforeEach
     void setUp() throws Exception {
-        connectionService = mock(ConnectionService.class);
+        connectionService = mock(IConnectionService.class);
         introspector = mock(SchemaIntrospector.class);
-        service = new TaskDataService(connectionService, introspector, MAPPER);
+        service = new TaskDataServiceImpl(connectionService, introspector, MAPPER);
         when(connectionService.resolveDataSource(1L)).thenReturn(H2);
         when(connectionService.dialect(1L)).thenReturn(new MySQLDialect());
         createUsersTable();
@@ -181,32 +181,32 @@ class TaskDataServiceTest {
 
     @Test
     void normalizeValueHandlesCommonJdbcTypes() throws Exception {
-        assertThat(TaskDataService.normalizeValue(null)).isNull();
-        assertThat(TaskDataService.normalizeValue(42)).isEqualTo(42);
-        assertThat(TaskDataService.normalizeValue(true)).isEqualTo(true);
-        assertThat(TaskDataService.normalizeValue("abc")).isEqualTo("abc");
-        assertThat(TaskDataService.normalizeValue(Timestamp.valueOf("2024-01-02 03:04:05")))
+        assertThat(TaskDataServiceImpl.normalizeValue(null)).isNull();
+        assertThat(TaskDataServiceImpl.normalizeValue(42)).isEqualTo(42);
+        assertThat(TaskDataServiceImpl.normalizeValue(true)).isEqualTo(true);
+        assertThat(TaskDataServiceImpl.normalizeValue("abc")).isEqualTo("abc");
+        assertThat(TaskDataServiceImpl.normalizeValue(Timestamp.valueOf("2024-01-02 03:04:05")))
                 .isEqualTo("2024-01-02T03:04:05");
-        assertThat(TaskDataService.normalizeValue(new byte[]{1, 2, 3})).isEqualTo("0x010203");
+        assertThat(TaskDataServiceImpl.normalizeValue(new byte[]{1, 2, 3})).isEqualTo("0x010203");
 
         org.postgresql.util.PGobject pg = new org.postgresql.util.PGobject();
         pg.setType("jsonb");
         pg.setValue("{\"a\":1}");
-        assertThat(TaskDataService.normalizeValue(pg)).isEqualTo("{\"a\":1}");
+        assertThat(TaskDataServiceImpl.normalizeValue(pg)).isEqualTo("{\"a\":1}");
 
         try (Connection connection = H2.getConnection()) {
             java.sql.Array array = connection.createArrayOf("BIGINT", new Long[]{1L, 2L, 3L});
-            assertThat(TaskDataService.normalizeValue(array)).isEqualTo(List.of(1L, 2L, 3L));
+            assertThat(TaskDataServiceImpl.normalizeValue(array)).isEqualTo(List.of(1L, 2L, 3L));
         }
     }
 
     @Test
     void isNumericTypeRecognizesCommonPkTypes() {
-        assertThat(TaskDataService.isNumericType("BIGINT")).isTrue();
-        assertThat(TaskDataService.isNumericType("int4")).isTrue();
-        assertThat(TaskDataService.isNumericType("UUID")).isFalse();
-        assertThat(TaskDataService.isNumericType("VARCHAR")).isFalse();
-        assertThat(TaskDataService.isNumericType(null)).isFalse();
+        assertThat(TaskDataServiceImpl.isNumericType("BIGINT")).isTrue();
+        assertThat(TaskDataServiceImpl.isNumericType("int4")).isTrue();
+        assertThat(TaskDataServiceImpl.isNumericType("UUID")).isFalse();
+        assertThat(TaskDataServiceImpl.isNumericType("VARCHAR")).isFalse();
+        assertThat(TaskDataServiceImpl.isNumericType(null)).isFalse();
     }
 
     // ---- helpers ----

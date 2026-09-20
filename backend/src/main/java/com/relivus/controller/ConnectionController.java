@@ -4,7 +4,7 @@ import com.relivus.common.api.ApiResponse;
 import com.relivus.dto.ConnectionResponse;
 import com.relivus.dto.ConnectionTestResult;
 import com.relivus.dto.CreateConnectionRequest;
-import com.relivus.service.ConnectionService;
+import com.relivus.service.IConnectionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -27,9 +27,9 @@ import java.util.List;
 @RequestMapping("/api/connections")
 public class ConnectionController {
 
-    private final ConnectionService connectionService;
+    private final IConnectionService connectionService;
 
-    public ConnectionController(ConnectionService connectionService) {
+    public ConnectionController(IConnectionService connectionService) {
         this.connectionService = connectionService;
     }
 

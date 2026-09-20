@@ -3,7 +3,7 @@ package com.relivus.task;
 /**
  * 任务进度推送接口（按任务分组推送）。
  *
- * <p>TaskService 在更新进度、写日志、完成、失败、取消时调用；SSE 实现按 taskId
+ * <p>ITaskService 在更新进度、写日志、完成、失败、取消时调用；SSE 实现按 taskId
  * 从连接组取 SseEmitter 推送对应事件。接口与事件载荷对应。
  */
 public interface TaskProgressNotifier {

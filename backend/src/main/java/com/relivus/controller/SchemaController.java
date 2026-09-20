@@ -12,7 +12,7 @@ import com.relivus.generator.TopologicalSorter;
 import com.relivus.schema.SchemaCache;
 import com.relivus.schema.SchemaIntrospector;
 import com.relivus.schema.model.TableMetadata;
-import com.relivus.service.ConnectionService;
+import com.relivus.service.IConnectionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,11 +33,11 @@ import java.util.List;
 @RequestMapping("/api/schema")
 public class SchemaController {
 
-    private final ConnectionService connectionService;
+    private final IConnectionService connectionService;
     private final SchemaIntrospector introspector;
     private final SchemaCache schemaCache;
 
-    public SchemaController(ConnectionService connectionService, SchemaIntrospector introspector,
+    public SchemaController(IConnectionService connectionService, SchemaIntrospector introspector,
                             SchemaCache schemaCache) {
         this.connectionService = connectionService;
         this.introspector = introspector;
@@ -92,11 +92,11 @@ public class SchemaController {
         });
     }
 
-    /** 由 ConnectionService 拆装数据源与方言，避免在 Controller 内直连 JDBC 细节。 */
+    /** 由 IConnectionService 拆装数据源与方言，避免在 Controller 内直连 JDBC 细节。 */
     private static final class DataSourceResolver {
-        private final ConnectionService connectionService;
+        private final IConnectionService connectionService;
 
-        DataSourceResolver(ConnectionService connectionService) {
+        DataSourceResolver(IConnectionService connectionService) {
             this.connectionService = connectionService;
         }
 

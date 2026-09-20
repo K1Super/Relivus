@@ -10,7 +10,8 @@ import com.relivus.generator.ValueGeneratorFactory;
 import com.relivus.repository.TaskLogRepository;
 import com.relivus.repository.TaskRepository;
 import com.relivus.task.SseTaskProgressNotifier;
-import com.relivus.task.TaskService;
+import com.relivus.task.ITaskService;
+import com.relivus.task.TaskServiceImpl;
 import com.relivus.task.TaskStatus;
 import org.h2.jdbcx.JdbcDataSource;
 import org.junit.jupiter.api.Test;
@@ -79,7 +80,7 @@ class TaskCancelIT extends AbstractDatabaseIT {
         TaskRepository taskRepository = new TaskRepository(meta.jdbc);
         TaskLogRepository taskLogRepository = new TaskLogRepository(meta.jdbc);
         SseTaskProgressNotifier notifier = new SseTaskProgressNotifier(new com.fasterxml.jackson.databind.ObjectMapper());
-        TaskService service = new TaskService(taskRepository, taskLogRepository, executor, notifier);
+        ITaskService service = new TaskServiceImpl(taskRepository, taskLogRepository, executor, notifier);
 
         Long taskId = service.createTask("generation", 1L, "{}");
         DataGenerationEngine engine = new DataGenerationEngine(new ValueGeneratorFactory(), INTROSPECTOR);
@@ -109,7 +110,7 @@ class TaskCancelIT extends AbstractDatabaseIT {
         executor.shutdown();
     }
 
-    private TaskEntity waitForStatus(TaskService service, Long taskId, TaskStatus status, long seconds)
+    private TaskEntity waitForStatus(ITaskService service, Long taskId, TaskStatus status, long seconds)
             throws InterruptedException {
         TaskEntity entity = null;
         long deadline = System.currentTimeMillis() + seconds * 1000;

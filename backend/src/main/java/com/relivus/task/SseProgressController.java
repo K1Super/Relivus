@@ -22,10 +22,10 @@ public class SseProgressController {
     /** SSE 连接超时（毫秒）：30 分钟。 */
     private static final long SSE_TIMEOUT_MILLIS = 30 * 60 * 1000L;
 
-    private final TaskService taskService;
+    private final ITaskService taskService;
     private final SseTaskProgressNotifier notifier;
 
-    public SseProgressController(TaskService taskService, SseTaskProgressNotifier notifier) {
+    public SseProgressController(ITaskService taskService, SseTaskProgressNotifier notifier) {
         this.taskService = taskService;
         this.notifier = notifier;
     }

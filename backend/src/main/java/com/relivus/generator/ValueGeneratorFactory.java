@@ -9,7 +9,7 @@ import com.relivus.schema.model.ForeignKeyMetadata;
 import com.relivus.schema.model.TableMetadata;
 import com.relivus.ai.AiHttpClient;
 import com.relivus.config.RelivusProperties;
-import com.relivus.service.AiConfigService;
+import com.relivus.service.IAiConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -80,7 +80,7 @@ public final class ValueGeneratorFactory {
     private static final List<String> SKIPPABLE_TYPES = List.of("JSON", "BLOB", "BINARY", "BYTEA", "GEOMETRY");
 
     private AiHttpClient aiHttpClient;
-    private AiConfigService aiConfigService;
+    private IAiConfigService aiConfigService;
     private RelivusProperties relivusProperties;
 
     /**
@@ -88,7 +88,7 @@ public final class ValueGeneratorFactory {
      * 工厂仍可实例化，仅在 "ai" 分支按空引用抛 {@code VALIDATION_FAILED}。
      */
     @Autowired(required = false)
-    public void setAiSupport(AiHttpClient aiHttpClient, AiConfigService aiConfigService,
+    public void setAiSupport(AiHttpClient aiHttpClient, IAiConfigService aiConfigService,
                              RelivusProperties relivusProperties) {
         this.aiHttpClient = aiHttpClient;
         this.aiConfigService = aiConfigService;

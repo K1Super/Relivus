@@ -215,7 +215,7 @@ Stop-Process -Id <pid>
 
 ## 9 数据质量校验
 
-生成/脱敏完成后用 SQL 校验约束满足情况（PostgreSQL 演示库）：
+生成/脱敏完成后用 SQL 校验约束满足情况（PostgreSQL 目标库）：
 
 ```sql
 -- 年龄区间（users.age ∈ 18..70）
@@ -253,7 +253,7 @@ MySQL 等价：邮箱 `email NOT REGEXP '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-
 - prod profile（`--spring.profiles.active=prod`）：单行 `|` 分隔结构化字段，便于采集解析：
 
 ```text
-2026-09-18T10:05:00.123+08:00|INFO|traceId值|com.relivus.task.TaskService|任务已创建
+2026-09-18T10:05:00.123+08:00|INFO|traceId值|com.relivus.task.TaskServiceImpl|任务已创建
 ```
 
 字段顺序：`时间|级别|traceId|logger|消息`。无 ANSI 转义。

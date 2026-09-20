@@ -13,7 +13,7 @@ import com.relivus.entity.TaskEntity;
 import com.relivus.schema.SchemaIntrospector;
 import com.relivus.schema.model.ColumnMetadata;
 import com.relivus.schema.model.TableMetadata;
-import com.relivus.service.ConnectionService;
+import com.relivus.service.IConnectionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -42,18 +42,15 @@ import java.util.Map;
  * 表名仅接受任务配置白名单内的值，主键列名来自数据库元数据，过滤值全部走参数绑定。
  */
 @Service
-public class TaskDataService {
+public class TaskDataServiceImpl implements ITaskDataService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(TaskDataService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TaskDataServiceImpl.class);
 
-    /** 单页行数上限（前端分页与 SQL 分页一致，防超量拉取）。 */
-    public static final int MAX_LIMIT = 200;
-
-    private final ConnectionService connectionService;
+    private final IConnectionService connectionService;
     private final SchemaIntrospector introspector;
     private final ObjectMapper objectMapper;
 
-    public TaskDataService(ConnectionService connectionService, SchemaIntrospector introspector,
+    public TaskDataServiceImpl(IConnectionService connectionService, SchemaIntrospector introspector,
                            ObjectMapper objectMapper) {
         this.connectionService = connectionService;
         this.introspector = introspector;
@@ -65,6 +62,7 @@ public class TaskDataService {
      *
      * <p>无数值主键的表写入 null（回看时展示全表数据）。必须在引擎真正插入前调用。
      */
+    @Override
     public Map<String, Long> captureBaselines(DataSource dataSource, DatabaseDialect dialect,
                                               GenerationConfig config) {
         Map<String, Long> baselines = new LinkedHashMap<>();
@@ -100,6 +98,7 @@ public class TaskDataService {
     }
 
     /** 生成任务表清单（前端表切换），含是否可按基线精确筛选。 */
+    @Override
     public List<TaskGeneratedTable> listTables(TaskEntity task) {
         requireSuccessfulGeneration(task);
         GenerationConfig config = parseConfig(task);
@@ -113,6 +112,7 @@ public class TaskDataService {
     }
 
     /** 分页读取某表本次生成的数据。 */
+    @Override
     public TaskDataPage readData(TaskEntity task, String table, int limit, int offset) {
         requireSuccessfulGeneration(task);
         GenerationConfig config = parseConfig(task);

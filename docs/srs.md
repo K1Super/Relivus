@@ -214,9 +214,9 @@ Relivus 自有库（默认 `relivus_meta`），由 Flyway 管理，存放：
 
 用户自行配置的 MySQL / PostgreSQL 库，是内省、生成、脱敏的操作对象。Relivus 不迁移目标库结构，不改动其 Schema。
 
-### 5.3 示例库
+### 5.3 目标库准备
 
-`demo/mysql/init.sql` 与 `demo/postgresql/init.sql` 提供演示目标库 `relivus_demo`（users / orders），覆盖 ENUM、CHECK、UNIQUE、外键，用于本地联调与集成测试。
+目标库由用户自行创建，Relivus 不提供初始化脚本、不迁移目标库结构。本地联调所需的目标表（如 users / orders，覆盖 ENUM、CHECK、UNIQUE、外键）由用户自行准备；集成测试的目标库结构由 Testcontainers 在用例内自建，测试结束随容器销毁，不依赖任何随仓库分发的示例脚本。
 
 ## 6. 验收标准
 

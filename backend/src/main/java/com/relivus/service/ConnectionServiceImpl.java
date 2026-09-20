@@ -32,9 +32,9 @@ import java.util.Locale;
  * 内存中短暂存在，用于创建数据源，绝不出现在日志与响应中。
  */
 @Service
-public class ConnectionService {
+public class ConnectionServiceImpl implements IConnectionService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ConnectionService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ConnectionServiceImpl.class);
 
     private final ConnectionRepository repository;
     private final CryptoService cryptoService;
@@ -43,7 +43,7 @@ public class ConnectionService {
     private final AuditLogRepository auditLogRepository;
     private final SchemaCache schemaCache;
 
-    public ConnectionService(ConnectionRepository repository, CryptoService cryptoService,
+    public ConnectionServiceImpl(ConnectionRepository repository, CryptoService cryptoService,
                              TargetDataSourceRegistry dataSourceRegistry, DialectRegistry dialectRegistry,
                              AuditLogRepository auditLogRepository, SchemaCache schemaCache) {
         this.repository = repository;
@@ -54,10 +54,12 @@ public class ConnectionService {
         this.schemaCache = schemaCache;
     }
 
+    @Override
     public List<ConnectionResponse> list() {
         return repository.findAll().stream().map(ConnectionResponse::from).toList();
     }
 
+    @Override
     @Transactional
     public ConnectionResponse create(CreateConnectionRequest request) {
         validateDbType(request.dbType());
@@ -84,6 +86,7 @@ public class ConnectionService {
         return ConnectionResponse.from(repository.findById(id).orElseThrow());
     }
 
+    @Override
     @Transactional
     public ConnectionResponse update(Long id, CreateConnectionRequest request) {
         ConnectionEntity entity = requireEntity(id);
@@ -108,6 +111,7 @@ public class ConnectionService {
         return ConnectionResponse.from(entity);
     }
 
+    @Override
     @Transactional
     public void delete(Long id) {
         ConnectionEntity entity = requireEntity(id);
@@ -117,6 +121,7 @@ public class ConnectionService {
     }
 
     /** 测试未保存连接参数（Fast fail：连接失败即返回 1001，供 UI 即时反馈）。 */
+    @Override
     public ConnectionTestResult test(CreateConnectionRequest request) {
         validateDbType(request.dbType());
         String dbType = normalizeDbType(request.dbType());
@@ -150,6 +155,7 @@ public class ConnectionService {
     /**
      * 测试已保存连接。
      */
+    @Override
     public ConnectionTestResult testById(Long id) {
         ConnectionEntity entity = requireEntity(id);
         DataSource ds = resolveDataSource(id);
@@ -166,6 +172,7 @@ public class ConnectionService {
     }
 
     /** 拿取目标库 DataSource（动态创建并缓存，密码仅内存短存）。 */
+    @Override
     public DataSource resolveDataSource(Long connectionId) {
         ConnectionEntity entity = requireEntity(connectionId);
         String password;
@@ -183,12 +190,14 @@ public class ConnectionService {
     }
 
     /** 获取连接方言。 */
+    @Override
     public DatabaseDialect dialect(Long connectionId) {
         ConnectionEntity entity = requireEntity(connectionId);
         return dialectRegistry.resolveByJdbcUrl(driverFromDialect(entity.getDbType()));
     }
 
     /** 连接实体是否存在。 */
+    @Override
     public ConnectionEntity requireEntity(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RelivusException(ErrorCode.VALIDATION_FAILED, "Connection not found: " + id));

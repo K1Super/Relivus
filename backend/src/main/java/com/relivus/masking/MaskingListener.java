@@ -3,7 +3,7 @@ package com.relivus.masking;
 /**
  * 脱敏引擎运行监听器（任务进度回调，脱敏侧）。
  *
- * <p>由任务执行层（TaskService）桥接为进度日志与 SSE 推送。实现必须线程安全且不阻塞主循环。
+ * <p>由任务执行层（ITaskService）桥接为进度日志与 SSE 推送。实现必须线程安全且不阻塞主循环。
  */
 public interface MaskingListener {
 

@@ -32,14 +32,14 @@ class AiConfigServiceTest {
     private AiConfigRepository repository;
     private CryptoService cryptoService;
     private AiHttpClient aiHttpClient;
-    private AiConfigService service;
+    private IAiConfigService service;
 
     @BeforeEach
     void setUp() {
         repository = mock(AiConfigRepository.class);
         cryptoService = mock(CryptoService.class);
         aiHttpClient = mock(AiHttpClient.class);
-        service = new AiConfigService(repository, cryptoService, aiHttpClient);
+        service = new AiConfigServiceImpl(repository, cryptoService, aiHttpClient);
     }
 
     private static AiConfigEntity entity(long id, String name, String cipher) {

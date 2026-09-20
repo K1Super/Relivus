@@ -7,6 +7,7 @@
 
 ## [Unreleased]
 
+- 2026-09-20 工程化整改：Service 层按编码规范接口化（`IConnectionService` / `IAiConfigService` / `ITaskService` / `ITaskDataService` 接口 + 对应 `Impl` 实现，纯重构无逻辑变更）；修复 CI 对启动脚本的检查项（`start-dev.ps1`），前端流水线新增 `npm run build`（含 `tsc --noEmit`）类型检查与构建门禁；修复 README 与文档导航中的失效链接（`srs.md` / `architecture.md`），CI 徽章替换为实际仓库地址；移除不存在的 `demo/` 示例库目录引用，目标库统一表述为用户自行准备。
 - 2026-09-18 文档体系重组：docs 由 19 篇旧文档整合为 11 篇标准文档（本 CHANGELOG 记录历史版本）。
 
 ## [2.3.0] - 2026-09-18
@@ -17,8 +18,6 @@
 - `TimestampGenerator` 表内单调递增且永不未来：按行号在默认 5 年窗口内线性推进（含 1/8 步长抖动），并向上截断至当前时间。
 - `BatchInserter`：PostgreSQL 方言下自增主键回填改为逐行 INSERT 取 key，规避批量 `INSERT ... RETURNING` 的 keys 返回顺序不保证导致的主键回填错位，确保 `created_at` 与 `id` 严格单调对应。
 - 姓名与性别联动：`ChinesePersonData` 名库按男/女分库（男 29 例、女 21 例），引擎整行生成后校验 name 性别倾向与 gender 一致，不一致按 gender 重生成，保证「男是男名、女是女名」。
-- demo 双方言 DDL（`demo/postgresql/init.sql` / `demo/mysql/init.sql`）：`user_gender` 枚举仅含 `男` / `女`（删除 M/F/O 字母值并补充类型注释）、`balance` 改为 `numeric(18,2) NOT NULL DEFAULT 0` 并新增 `CHECK (balance >= 0)`、核心列 `NOT NULL` 收敛、补充列注释。
-- 存量库升级脚本：新增 `demo/postgresql/upgrade_cleanup.sql` 与 `demo/mysql/upgrade_cleanup.sql`（幂等：枚举重建、类型变更、约束补齐、注释）。
 - 文档：`database-design.md` / `testing.md` 同步数据质量整改内容（枚举、精度、约束、质量校验 SQL）。
 
 ### Fixed
@@ -49,11 +48,10 @@
 
 ### Fixed
 
-- age 生成区间收敛至 18~70（demo CHECK 同步收紧）。
+- age 生成区间收敛至 18~70。
 - 姓名、邮箱恢复语义化中文数据。
 - rowCount 增加上限 500000 校验。
 - 正则参数增加长度上限，并改用带错误码的校验异常。
-- demo users.name 收窄为 varchar(64)，并补充 idx_users_name 索引。
 
 ## [2.0.0] - 2026-09
 

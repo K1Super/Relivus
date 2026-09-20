@@ -2,7 +2,7 @@
 
 数据库测试数据生成与脱敏系统 —— 面向 MySQL 与 PostgreSQL 的可视化测试数据工厂。
 
-[![CI](https://github.com/relivus/relivus/actions/workflows/ci.yml/badge.svg)](https://github.com/relivus/relivus/actions/workflows/ci.yml)
+[![CI](https://github.com/K1Super/Relivus/actions/workflows/ci.yml/badge.svg)](https://github.com/K1Super/Relivus/actions/workflows/ci.yml)
 
 ## 核心能力
 
@@ -27,7 +27,6 @@ Relivus/
 ├── backend/          # Spring Boot 后端服务（含 Flyway 迁移与单元/集成测试）
 ├── frontend/         # React 前端应用
 ├── docs/             # 项目文档（需求、设计、接口规范等）
-├── demo/             # 元数据库初始化脚本（MySQL / PostgreSQL）
 ├── deploy/           # 生产部署配置（systemd / Nginx / 环境变量模板）
 └── scripts/          # 部署运维脚本
 ```
@@ -40,8 +39,8 @@ Relivus/
 
 完整文档导航见 [docs/README.md](docs/README.md)：
 
-- 需求规格：[docs/SRS.md](docs/SRS.md)
-- 总体设计：[docs/high-level-design.md](docs/high-level-design.md)
+- 需求规格：[docs/srs.md](docs/srs.md)
+- 总体设计：[docs/architecture.md](docs/architecture.md)
 - 数据库设计：[docs/database-design.md](docs/database-design.md)
 - 接口规范：[docs/api-spec.md](docs/api-spec.md)
 - 编码规范：[docs/coding-standards.md](docs/coding-standards.md)
@@ -52,5 +51,3 @@ Relivus/
 ## 许可证
 
 本项目采用 [MIT License](LICENSE) 开源。
-
-> 说明：CI 徽章中的仓库地址为占位符，推送到 GitHub 后请将 README 中 `relivus/relivus` 替换为实际的「所有者/仓库名」。
